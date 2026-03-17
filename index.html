@@ -1197,6 +1197,8 @@
     <a href="#opportunities">Opportunities</a>
     <a href="#newsletters">Newsletters</a>
     <a href="#spotlights">Spotlights</a>
+    <a href="#upcoming-events">Upcoming Events</a>
+    <a href="#past-events">Past Events</a>
     <a href="#resources">Campus Resources</a>
   </div>
 </nav>
@@ -1788,6 +1790,42 @@
     </div>
   </section>
 
+  <!-- UPCOMING EVENTS -->
+  <section id="upcoming-events">
+    <div class="section-header">
+      <div>
+        <p class="section-label">This Semester</p>
+        <h2 class="section-title">Upcoming <em>Events</em></h2>
+        <p class="section-desc">Workshops, excursions, and programs happening soon. Attend at least 3 per semester!</p>
+      </div>
+    </div>
+    <hr class="section-divider">
+    <div class="program-grid" style="margin-top:24px;" id="upcoming-events-grid">
+      <div style="text-align:center;padding:40px;color:var(--text-light);font-size:14px);grid-column:1/-1;">
+        <div style="font-size:32px;margin-bottom:10px;">📅</div>
+        <p>Upcoming events will appear here. Check back soon!</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- PAST EVENTS -->
+  <section id="past-events">
+    <div class="section-header">
+      <div>
+        <p class="section-label">Archive</p>
+        <h2 class="section-title">Past <em>Events</em></h2>
+        <p class="section-desc">A look back at previous SSS workshops, excursions, and programs.</p>
+      </div>
+    </div>
+    <hr class="section-divider">
+    <div class="program-grid" style="margin-top:24px;" id="past-events-grid">
+      <div style="text-align:center;padding:40px;color:var(--text-light);font-size:14px;grid-column:1/-1;">
+        <div style="font-size:32px;margin-bottom:10px;">🗂</div>
+        <p>Past events will appear here once added.</p>
+      </div>
+    </div>
+  </section>
+
   <!-- CTA -->
   <div class="cta-band">
     <div>
@@ -1823,7 +1861,7 @@
     <hr class="footer-divider">
     <div class="footer-bottom">
       <p>© 2025 SSS Student Success Hub · St. John's University</p>
-      <p>Funded by the U.S. Department of Education · <span>TRIO Program</span> · <a href="admin.html" style="color:rgba(255,255,255,0.1);text-decoration:none;font-size:11px;">&#9679;</a></p>
+      <p>Funded by the U.S. Department of Education · <span>TRIO Program</span> · <a href="admin.html" style="color:rgba(255,255,255,0.4);text-decoration:none;font-size:12px;font-weight:500;">Admin</a></p>
     </div>
   </div>
 </footer>
@@ -1957,56 +1995,37 @@
   async function loadDynamicEvents() {
     const upcoming = await fetchSheet('upcoming');
     const past     = await fetchSheet('past');
-    if (!upcoming.length && !past.length) return;
 
-    let evSection = document.getElementById('events-section');
-    if (!evSection) {
-      evSection = document.createElement('section');
-      evSection.id = 'events-section';
-      const cta = document.querySelector('.cta-band');
-      if (cta) cta.parentNode.insertBefore(evSection, cta);
+    const upcomingGrid = document.getElementById('upcoming-events-grid');
+    const pastGrid     = document.getElementById('past-events-grid');
+
+    if (upcomingGrid) {
+      if (upcoming.length) {
+        upcomingGrid.innerHTML = upcoming.map(e => `
+          <div class="program-tile" style="border-left:4px solid var(--green);">
+            <div class="tile-icon tile-green">📅</div>
+            <div class="tile-body">
+              <h3>${e.name||''}</h3>
+              <p>${[e.date, e.time, e.location].filter(Boolean).join(' · ')}</p>
+              ${e.desc ? `<p style="margin-top:4px;font-size:12px;">${e.desc}</p>` : ''}
+              ${e.url ? `<a href="${e.url}" target="_blank" style="font-size:12px;color:var(--red);font-weight:600;text-decoration:none;display:inline-block;margin-top:6px;">RSVP →</a>` : ''}
+            </div>
+          </div>`).join('');
+      }
     }
 
-    let html = `<div class="section-header"><div>
-      <p class="section-label">Calendar</p>
-      <h2 class="section-title">Events &amp; <em>Workshops</em></h2>
-      <p class="section-desc">Academic success, financial literacy, career readiness, cultural excursions, and more.</p>
-    </div></div><hr class="section-divider">`;
-
-    if (upcoming.length) {
-      html += `<h3 style="font-family:'DM Serif Display',serif;font-size:18px;font-weight:400;color:var(--dark);margin:24px 0 14px;">📅 Upcoming Events</h3><div class="program-grid" style="margin-bottom:32px;">`;
-      upcoming.forEach(e => {
-        html += `<div class="program-tile" style="border-left:4px solid var(--green);">
-          <div class="tile-icon tile-green">📅</div>
-          <div class="tile-body">
-            <h3>${e.name||''}</h3>
-            <p>${[e.date, e.time, e.location].filter(Boolean).join(' · ')}</p>
-            ${e.desc ? `<p style="margin-top:4px;font-size:12px;">${e.desc}</p>` : ''}
-            ${e.url ? `<a href="${e.url}" target="_blank" style="font-size:12px;color:var(--red);font-weight:600;text-decoration:none;display:inline-block;margin-top:6px;">RSVP →</a>` : ''}
-          </div></div>`;
-      });
-      html += `</div>`;
-    }
-
-    if (past.length) {
-      html += `<h3 style="font-family:'DM Serif Display',serif;font-size:18px;font-weight:400;color:var(--dark);margin:0 0 14px;">🗂 Past Events</h3><div class="program-grid">`;
-      past.forEach(e => {
-        html += `<div class="program-tile" style="opacity:.75;">
-          <div class="tile-icon tile-red">🗂</div>
-          <div class="tile-body">
-            <h3>${e.name||''}</h3>
-            <p>${[e.date, e.cat].filter(Boolean).join(' · ')}</p>
-            ${e.desc ? `<p style="margin-top:4px;font-size:12px;">${e.desc}</p>` : ''}
-          </div></div>`;
-      });
-      html += `</div>`;
-    }
-
-    evSection.innerHTML = html;
-    const nav = document.querySelector('.nav-inner');
-    if (nav && !document.querySelector('[href="#events-section"]')) {
-      const a = document.createElement('a'); a.href = '#events-section'; a.textContent = 'Events';
-      nav.appendChild(a);
+    if (pastGrid) {
+      if (past.length) {
+        pastGrid.innerHTML = past.map(e => `
+          <div class="program-tile" style="opacity:.8;">
+            <div class="tile-icon tile-red">🗂</div>
+            <div class="tile-body">
+              <h3>${e.name||''}</h3>
+              <p>${[e.date, e.cat].filter(Boolean).join(' · ')}</p>
+              ${e.desc ? `<p style="margin-top:4px;font-size:12px;">${e.desc}</p>` : ''}
+            </div>
+          </div>`).join('');
+      }
     }
     observeNewCards();
   }
