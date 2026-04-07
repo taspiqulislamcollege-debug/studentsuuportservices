@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Textbook Borrowing – SSS Student Hub</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --red: #CC0033; --red-dark: #A8002A; --red-soft: #F9E6EA;
+    --gold: #C8972A; --gold-light: #F5E6C0;
+    --off-white: #FAF9F7; --warm-gray: #F2EFE9;
+    --dark: #1A1614; --text: #2C2420; --text-light: #5C534E;
+    --border: #E8E2DA; --shadow: rgba(26,22,20,0.08);
+    --green: #16a34a; --green-soft: #dcfce7;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'DM Sans', sans-serif; background: var(--off-white); color: var(--text); line-height: 1.6; }
+
+  /* TOPBAR */
+  .topbar { background: var(--dark); padding: 8px 0; font-size: 12px; color: rgba(255,255,255,0.6); letter-spacing: 0.04em; text-align: center; }
+  .topbar span { color: var(--gold); font-weight: 500; }
+
+  /* HEADER */
+  header { background: var(--red); position: relative; overflow: hidden; }
+  header::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 80% 60% at 110% -10%, var(--red-dark) 0%, transparent 60%); pointer-events: none; }
+  .header-inner { position: relative; max-width: 1080px; margin: auto; padding: 40px 24px 36px; display: flex; align-items: center; gap: 20px; }
+  .header-icon { font-size: 40px; }
+  .header-eyebrow { font-size: 11px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(255,255,255,0.7); margin-bottom: 6px; }
+  header h1 { font-family: 'DM Serif Display', serif; font-size: clamp(24px, 4vw, 36px); font-weight: 400; color: white; margin-bottom: 6px; }
+  header p { font-size: 14px; color: rgba(255,255,255,0.8); font-weight: 300; }
+
+  /* NAV */
+  .back-nav { background: var(--dark); padding: 0 24px; }
+  .back-nav a { display: inline-flex; align-items: center; gap: 6px; color: rgba(255,255,255,0.6); text-decoration: none; font-size: 13px; font-weight: 500; padding: 12px 0; transition: color .2s; }
+  .back-nav a:hover { color: white; }
+
+  /* MAIN */
+  main { max-width: 1080px; margin: auto; padding: 32px 24px 80px; }
+
+  /* ALERT BAND */
+  .alert-band {
+    background: white; border: 1px solid var(--border); border-radius: 16px;
+    padding: 24px 28px; margin-bottom: 28px;
+    display: flex; align-items: center; gap: 20px;
+    box-shadow: 0 4px 20px var(--shadow);
+    border-left: 5px solid var(--red);
+  }
+  .alert-icon { font-size: 36px; flex-shrink: 0; }
+  .alert-body h2 { font-family: 'DM Serif Display', serif; font-size: 18px; font-weight: 400; color: var(--dark); margin-bottom: 4px; }
+  .alert-body p { font-size: 14px; color: var(--text-light); font-weight: 300; }
+  .btn-assistance {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 11px 22px; background: var(--red); color: white;
+    border-radius: 10px; text-decoration: none; font-size: 13px; font-weight: 600;
+    white-space: nowrap; transition: background .2s, transform .15s; flex-shrink: 0;
+  }
+  .btn-assistance:hover { background: var(--red-dark); transform: translateY(-1px); }
+
+  /* STATS ROW */
+  .stats-row { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 28px; }
+  .stat-pill {
+    background: white; border: 1px solid var(--border); border-radius: 100px;
+    padding: 8px 18px; font-size: 13px; font-weight: 500; color: var(--text-light);
+    display: flex; align-items: center; gap: 6px;
+  }
+  .stat-pill strong { color: var(--red); font-family: 'DM Serif Display', serif; font-size: 18px; }
+
+  /* SEARCH + FILTER */
+  .search-bar {
+    background: white; border: 1.5px solid var(--border); border-radius: 14px;
+    padding: 14px 18px; display: flex; align-items: center; gap: 12px;
+    margin-bottom: 16px; box-shadow: 0 2px 8px var(--shadow);
+    transition: border-color .2s;
+  }
+  .search-bar:focus-within { border-color: var(--red); }
+  .search-bar input {
+    flex: 1; border: none; outline: none; font-size: 15px;
+    font-family: 'DM Sans', sans-serif; color: var(--text); background: transparent;
+  }
+  .search-bar input::placeholder { color: var(--text-light); }
+  .search-icon { font-size: 18px; color: var(--text-light); flex-shrink: 0; }
+  .clear-btn {
+    background: var(--warm-gray); border: none; border-radius: 6px;
+    padding: 4px 10px; font-size: 12px; cursor: pointer; color: var(--text-light);
+    font-family: 'DM Sans', sans-serif; display: none; transition: background .2s;
+  }
+  .clear-btn:hover { background: var(--border); }
+  .clear-btn.visible { display: block; }
+
+  /* RESULTS INFO */
+  .results-info { font-size: 13px; color: var(--text-light); margin-bottom: 16px; font-weight: 400; }
+  .results-info strong { color: var(--red); }
+
+  /* TABLE */
+  .table-wrap { background: white; border: 1px solid var(--border); border-radius: 16px; overflow: hidden; box-shadow: 0 4px 20px var(--shadow); }
+  table { width: 100%; border-collapse: collapse; }
+  thead tr { background: var(--dark); }
+  thead th { padding: 14px 18px; text-align: left; font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.7); }
+  thead th:first-child { color: var(--gold); }
+  tbody tr { border-bottom: 1px solid var(--border); transition: background .15s; }
+  tbody tr:last-child { border-bottom: none; }
+  tbody tr:hover { background: var(--red-soft); }
+  tbody td { padding: 13px 18px; font-size: 13px; color: var(--text); vertical-align: middle; }
+  tbody td:first-child { font-weight: 600; color: var(--dark); }
+  .edition-badge {
+    display: inline-block; background: var(--warm-gray); color: var(--text-light);
+    font-size: 10px; font-weight: 600; padding: 2px 8px; border-radius: 100px;
+    letter-spacing: 0.04em;
+  }
+  .note-badge {
+    display: inline-block; background: var(--green-soft); color: var(--green);
+    font-size: 10px; font-weight: 600; padding: 2px 8px; border-radius: 100px;
+  }
+
+  /* NO RESULTS */
+  .no-results {
+    text-align: center; padding: 60px 20px; display: none;
+  }
+  .no-results .nr-icon { font-size: 40px; margin-bottom: 12px; }
+  .no-results h3 { font-size: 16px; font-weight: 600; color: var(--dark); margin-bottom: 6px; }
+  .no-results p { font-size: 14px; color: var(--text-light); font-weight: 300; }
+
+  /* INFO BOX */
+  .info-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px; margin-bottom: 28px; }
+  .info-card { background: white; border: 1px solid var(--border); border-radius: 14px; padding: 20px; display: flex; gap: 14px; align-items: flex-start; }
+  .info-icon { width: 40px; height: 40px; border-radius: 10px; background: var(--red-soft); display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
+  .info-card h3 { font-size: 13px; font-weight: 600; color: var(--dark); margin-bottom: 3px; }
+  .info-card p { font-size: 12px; color: var(--text-light); font-weight: 300; line-height: 1.45; }
+
+  @media (max-width: 640px) {
+    .alert-band { flex-direction: column; align-items: flex-start; }
+    thead th:nth-child(3) { display: none; }
+    tbody td:nth-child(3) { display: none; }
+  }
+
+  /* DONATE BAND */
+  .donate-band {
+    background: linear-gradient(135deg, #1A1614, #2C2420);
+    border-radius: 16px; padding: 24px 28px; margin-bottom: 28px;
+    display: flex; align-items: center; gap: 20px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+  }
+  .donate-icon { font-size: 36px; flex-shrink: 0; }
+  .donate-body h2 { font-family: 'DM Serif Display', serif; font-size: 18px; font-weight: 400; color: white; margin-bottom: 4px; }
+  .donate-body p { font-size: 13px; color: rgba(255,255,255,0.6); font-weight: 300; }
+  .btn-donate {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 11px 22px; background: var(--gold); color: white;
+    border-radius: 10px; text-decoration: none; font-size: 13px; font-weight: 600;
+    white-space: nowrap; transition: all .2s; flex-shrink: 0; border: none; cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
+  }
+  .btn-donate:hover { background: #A8782A; transform: translateY(-1px); }
+
+  /* MODAL */
+  .modal-overlay {
+    position: fixed; inset: 0; background: rgba(0,0,0,0.55); z-index: 1000;
+    display: none; align-items: center; justify-content: center; padding: 20px;
+  }
+  .modal-overlay.open { display: flex; }
+  .modal {
+    background: white; border-radius: 20px; padding: 32px;
+    width: 100%; max-width: 500px;
+    box-shadow: 0 24px 80px rgba(0,0,0,0.2);
+    animation: fadeUp .3s ease both;
+  }
+  @keyframes fadeUp { from { opacity:0; transform:translateY(16px); } to { opacity:1; transform:translateY(0); } }
+  .modal-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 22px; }
+  .modal-header h2 { font-family: 'DM Serif Display', serif; font-size: 22px; font-weight: 400; color: var(--dark); }
+  .modal-close { width: 32px; height: 32px; border-radius: 8px; border: none; background: var(--warm-gray); cursor: pointer; font-size: 18px; display: flex; align-items: center; justify-content: center; color: var(--text-light); }
+  .form-group { margin-bottom: 16px; }
+  .form-group label { display: block; font-size: 12px; font-weight: 600; color: var(--text); margin-bottom: 5px; }
+  .form-group input, .form-group select {
+    width: 100%; padding: 10px 14px; border: 1.5px solid var(--border);
+    border-radius: 10px; font-size: 14px; font-family: 'DM Sans', sans-serif;
+    color: var(--text); outline: none; transition: border-color .2s;
+  }
+  .form-group input:focus, .form-group select:focus { border-color: var(--red); }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .form-actions { display: flex; gap: 10px; justify-content: flex-end; margin-top: 20px; padding-top: 16px; border-top: 1px solid var(--border); }
+  .btn-cancel { padding: 10px 20px; background: var(--warm-gray); color: var(--text); border: 1px solid var(--border); border-radius: 10px; font-size: 13px; font-weight: 500; cursor: pointer; font-family: 'DM Sans', sans-serif; }
+  .btn-save { padding: 10px 20px; background: var(--red); color: white; border: none; border-radius: 10px; font-size: 13px; font-weight: 600; cursor: pointer; font-family: 'DM Sans', sans-serif; transition: background .2s; }
+  .btn-save:hover { background: var(--red-dark); }
+
+  /* TOAST */
+  .toast { position: fixed; bottom: 24px; right: 24px; background: var(--dark); color: white; padding: 12px 20px; border-radius: 12px; font-size: 13px; font-weight: 500; box-shadow: 0 8px 24px rgba(0,0,0,0.3); z-index: 9998; display: none; align-items: center; gap: 8px; }
+  .toast.show { display: flex; }
+  .toast.success { border-left: 3px solid var(--green); }
+</style>
+</head>
+<body>
+
+<div class="topbar">TRIO Program · <span>St. John's University</span> · Room 103, St. John's Hall</div>
+
+<header>
+  <div class="header-inner">
+    <div class="header-icon">📚</div>
+    <div>
+      <p class="header-eyebrow">SSS Student Support Services</p>
+      <h1>Textbook Borrowing</h1>
+      <p>Browse all 219 available textbooks — borrow at no cost for the semester.</p>
+    </div>
+  </div>
+</header>
+
+<div class="back-nav">
+  <a href="index.html">← Back to Student Hub</a>
+</div>
+
+<main>
+
+  <!-- 3 ACTION CARDS -->
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;margin-bottom:28px;">
+
+    <!-- Borrow from SSS -->
+    <div style="background:white;border:1px solid var(--border);border-radius:16px;padding:24px;border-top:5px solid var(--red);box-shadow:0 4px 16px var(--shadow);">
+      <div style="font-size:32px;margin-bottom:10px;">📚</div>
+      <h3 style="font-family:'DM Serif Display',serif;font-size:17px;font-weight:400;color:var(--dark);margin-bottom:6px;">Borrow from SSS</h3>
+      <p style="font-size:13px;color:var(--text-light);font-weight:300;margin-bottom:16px;line-height:1.55;">Find your book in the list below and stop by <strong>Room 103, St. John's Hall</strong> to borrow it for free for the semester.</p>
+      <div style="font-size:12px;background:var(--red-soft);color:var(--red-dark);padding:8px 12px;border-radius:8px;font-weight:500;">✅ Free · No forms needed · Pick up in person</div>
+    </div>
+
+    <!-- Book not listed? Email SSS -->
+    <div style="background:white;border:1px solid var(--border);border-radius:16px;padding:24px;border-top:5px solid var(--gold);box-shadow:0 4px 16px var(--shadow);">
+      <div style="font-size:32px;margin-bottom:10px;">📧</div>
+      <h3 style="font-family:'DM Serif Display',serif;font-size:17px;font-weight:400;color:var(--dark);margin-bottom:6px;">Book Not Listed? Email Us</h3>
+      <p style="font-size:13px;color:var(--text-light);font-weight:300;margin-bottom:16px;line-height:1.55;">Don't see your textbook in our list? Email us and we'll do our best to get it for you or point you in the right direction.</p>
+      <a href="mailto:sss.sju133@gmail.com?subject=Textbook%20Request&body=Hi%2C%20I%20am%20looking%20for%20the%20following%20textbook%3A%0A%0ATitle%3A%20%0AAuthor%3A%20%0AEdition%3A%20%0ACourse%3A%20%0A%0AThank%20you!" style="display:inline-flex;align-items:center;gap:6px;padding:9px 18px;background:var(--gold);color:white;border-radius:9px;text-decoration:none;font-size:13px;font-weight:600;transition:all .2s;">📧 Email SSS to Request</a>
+    </div>
+
+    <!-- Request from University -->
+    <div style="background:white;border:1px solid var(--border);border-radius:16px;padding:24px;border-top:5px solid #1A3A8F;box-shadow:0 4px 16px var(--shadow);">
+      <div style="font-size:32px;margin-bottom:10px;">🏛️</div>
+      <h3 style="font-family:'DM Serif Display',serif;font-size:17px;font-weight:400;color:var(--dark);margin-bottom:6px;">Request from the University</h3>
+      <p style="font-size:13px;color:var(--text-light);font-weight:300;margin-bottom:16px;line-height:1.55;">SSS doesn't have it? Submit an official textbook assistance request to St. John's University Libraries through the form below.</p>
+      <a href="https://sjuit.formstack.com/forms/st_john_s_university_university_libraries_academic_resources_3_copy_1?sso=68c0739f55a44" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:6px;padding:9px 18px;background:#1A3A8F;color:white;border-radius:9px;text-decoration:none;font-size:13px;font-weight:600;">📋 University Textbook Request →</a>
+    </div>
+
+  </div>
+
+  <!-- DONATE BANNER -->
+  <div class="donate-band">
+    <div class="donate-icon">🎁</div>
+    <div class="donate-body" style="flex:1;">
+      <h2>Want to Donate Your Old Textbooks?</h2>
+      <p>Help a fellow SSS student succeed — donate your used textbooks so others can borrow them for free. Every book makes a difference.</p>
+    </div>
+    <a href="mailto:sss.sju133@gmail.com?subject=Textbook%20Donation&body=Hi%2C%20I%20would%20like%20to%20donate%20the%20following%20textbook(s)%3A%0A%0ATitle%3A%20%0AAuthor%3A%20%0AEdition%3A%20%0A%0AThank%20you!" class="btn-donate">📧 Email Us to Donate</a>
+  </div>
+
+  <!-- STATS -->
+  <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px; margin-bottom:16px;">
+    <div class="stats-row" style="margin-bottom:0;">
+      <div class="stat-pill"><strong id="total-count">219</strong> Total Textbooks</div>
+      <div class="stat-pill"><strong id="shown-count">219</strong> Showing</div>
+      <div class="stat-pill">🆓 100% Free to Borrow</div>
+      <div class="stat-pill">📍 Room 103, St. John's Hall</div>
+    </div>
+  </div>
+
+  <!-- SEARCH -->
+  <div class="search-bar">
+    <span class="search-icon">🔍</span>
+    <input type="text" id="search-input" placeholder="Search by title, author, or subject..." oninput="filterBooks()" />
+    <button class="clear-btn" id="clear-btn" onclick="clearSearch()">✕ Clear</button>
+  </div>
+
+  <p class="results-info" id="results-info">Showing <strong>219</strong> of 219 textbooks</p>
+
+  <!-- TABLE -->
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>Author</th>
+          <th>Edition / Vol</th>
+        </tr>
+      </thead>
+      <tbody id="book-table"></tbody>
+    </table>
+    <div class="no-results" id="no-results">
+      <div class="nr-icon">📚</div>
+      <h3>No textbooks found</h3>
+      <p>Try a different search term or <button onclick="clearSearch()" style="background:none;border:none;color:var(--red);cursor:pointer;font-weight:600;font-size:14px;">clear the search</button></p>
+    </div>
+  </div>
+
+</main>
+
+<!-- ADD TEXTBOOK MODAL -->
+<div class="modal-overlay" id="add-modal">
+  <div class="modal">
+    <div class="modal-header">
+      <h2>Add a Textbook</h2>
+      <button class="modal-close" onclick="closeAddModal()">✕</button>
+    </div>
+    <div class="form-group">
+      <label>Title *</label>
+      <input type="text" id="new-title" placeholder="e.g. Introduction to Psychology" />
+    </div>
+    <div class="form-row">
+      <div class="form-group">
+        <label>Author</label>
+        <input type="text" id="new-author" placeholder="e.g. Kaplan" />
+      </div>
+      <div class="form-group">
+        <label>Edition / Volume</label>
+        <input type="text" id="new-edition" placeholder="e.g. 5th" />
+      </div>
+    </div>
+    <div class="form-group">
+      <label>Note (optional)</label>
+      <input type="text" id="new-note" placeholder="e.g. Google Drive Copy" />
+    </div>
+    <div class="form-actions">
+      <button class="btn-cancel" onclick="closeAddModal()">Cancel</button>
+      <button class="btn-save" id="save-btn" onclick="saveNewBook()">📚 Add Textbook</button>
+    </div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+const API_URL = 'https://script.google.com/macros/s/AKfycbzywDyjo1Sh1ub2Ku5u4fQe3PQvI8K5SI2cAmWaevcwgNzqfHnWxu0M05_FINN3rc3KBw/exec';
+
+// ── ADMIN CHECK — show Add button only if admin is logged in ──
+const isAdmin = sessionStorage.getItem('sss_admin') === '1';
+if (isAdmin) {
+  const statsRow = document.querySelector('.stats-row');
+  const addBtn = document.createElement('button');
+  addBtn.className = 'btn-assistance';
+  addBtn.style.cssText = 'background:var(--green);margin-left:auto;';
+  addBtn.innerHTML = '+ Add Textbook';
+  addBtn.onclick = () => document.getElementById('add-modal').classList.add('open');
+  statsRow.parentNode.appendChild(addBtn);
+}
+
+// Close modal on overlay click
+document.getElementById('add-modal').addEventListener('click', e => {
+  if (e.target === document.getElementById('add-modal')) closeAddModal();
+});
+
+function closeAddModal() {
+  document.getElementById('add-modal').classList.remove('open');
+  document.getElementById('new-title').value = '';
+  document.getElementById('new-author').value = '';
+  document.getElementById('new-edition').value = '';
+  document.getElementById('new-note').value = '';
+}
+
+async function saveNewBook() {
+  const title = document.getElementById('new-title').value.trim();
+  if (!title) { alert('Please enter a title.'); return; }
+  const author  = document.getElementById('new-author').value.trim();
+  const edition = document.getElementById('new-edition').value.trim();
+  const note    = document.getElementById('new-note').value.trim();
+
+  const saveBtn = document.getElementById('save-btn');
+  saveBtn.textContent = '⏳ Saving...'; saveBtn.disabled = true;
+
+  try {
+    const id = Date.now().toString(36) + Math.random().toString(36).slice(2,5);
+    const url = API_URL + '?' + new URLSearchParams({ action:'add', sheet:'textbooks', id, title, author, edition, note });
+    const res = await fetch(url);
+    const json = await res.json();
+    if (json.error) throw new Error(json.error);
+
+    // Add to local list immediately
+    BOOKS.push({ title, author, edition, note });
+    closeAddModal();
+    filterBooks();
+    document.getElementById('total-count').textContent = BOOKS.length;
+    showToast('✅ Textbook added successfully!');
+  } catch(e) {
+    // Save locally even if Sheets fails
+    BOOKS.push({ title, author, edition, note });
+    closeAddModal();
+    filterBooks();
+    document.getElementById('total-count').textContent = BOOKS.length;
+    showToast('✅ Added locally! (Sheets sync may be pending)');
+  } finally {
+    saveBtn.textContent = '📚 Add Textbook'; saveBtn.disabled = false;
+  }
+}
+
+// ── LOAD extra books from Google Sheets ──
+async function loadSheetsBooks() {
+  try {
+    const url = API_URL + '?' + new URLSearchParams({ action:'getAll', sheet:'textbooks' });
+    const res = await fetch(url);
+    const json = await res.json();
+    if (json.data && json.data.length > 0) {
+      json.data.forEach(b => {
+        if (!BOOKS.find(existing => existing.title.toLowerCase() === (b.title||'').toLowerCase())) {
+          BOOKS.push({ title: b.title||'', author: b.author||'', edition: b.edition||'', note: b.note||'' });
+        }
+      });
+      renderBooks(BOOKS);
+      document.getElementById('total-count').textContent = BOOKS.length;
+    }
+  } catch(e) { /* silently fail — hardcoded list still shows */ }
+}
+
+let toastTimer;
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg; t.className = 'toast show success';
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => t.classList.remove('show'), 3000);
+}
+
+const BOOKS = [{"title":"12th night or What You Will","edition":"","author":"Shakespeare","note":""},{"title":"14,000 Quips and Quotes for Writers and Speakers","edition":"","author":"E.C. McKenzie","note":""},{"title":"A Concise Economic History of the World","edition":"4th","author":"Cameron and Neal","note":""},{"title":"A History of World Societies","edition":"9th","author":"McKay, Hill, Buckler, Ebrey, Beck, Crowston and Wiesner-Hanks","note":""},{"title":"A Manual for Writers of Term Papers, Theses and Dissertations","edition":"6th","author":"Kate L. Turabian","note":""},{"title":"Academic Advising: A Comprehensive Handbook","edition":"","author":"Jossey Bass","note":""},{"title":"Accounting","edition":"26th","author":"","note":""},{"title":"Accounting","edition":"25th","author":"","note":""},{"title":"Accounting 25e and Financial Accounting 13e","edition":"","author":"Warren, Reeve and Ducnac","note":""},{"title":"Accounting 27e amd Financial Accounting 15e","edition":"","author":"Warren, Reeve and Ducnac","note":""},{"title":"Achieivng and Sustaining Institutional Excellence for the 1st Year of College","edition":"","author":"Barefoot, Gardener, Cutright","note":""},{"title":"Algebra I","edition":"","author":"CLIFF's","note":""},{"title":"Algebra II","edition":"","author":"CLIFF's","note":""},{"title":"Analyziung and Intepreting Literature","edition":"","author":"CLEP","note":""},{"title":"Anthropology for the Nineties","edition":"","author":"","note":""},{"title":"Assisting Conditions to Enhance Education Effectiveness","edition":"","author":"Kuth, Kinzie. Schuh and Whitt","note":""},{"title":"ATI TEAS Stratgeies, Pratice Review","edition":"","author":"KAPLAN","note":""},{"title":"Basic Math and Pre-Algebra","edition":"","author":"CLIFF's","note":""},{"title":"Biochemistry","edition":"","author":"Ochs","note":""},{"title":"Bioethics","edition":"4th","author":"Vaughn","note":""},{"title":"Bioethics: Principles, Issues and Cases","edition":"5th","author":"Vaughn","note":"GOOGLE DRIVE COPY"},{"title":"Biology","edition":"","author":"","note":""},{"title":"BLW 1001: Law and Business","edition":"","author":"St. John's University","note":""},{"title":"Book of Majors","edition":"12th","author":"College Board","note":""},{"title":"Brain and Behavior","edition":"","author":"Eagleman and Downar","note":""},{"title":"Building Teachers' Capcity for Success","edition":"","author":"Hall and Simeral","note":""},{"title":"Campus Confidential","edition":"","author":"Miller","note":""},{"title":"Candide","edition":"","author":"Voltaire","note":""},{"title":"Capitalism and the Historians","edition":"","author":"Hayek","note":""},{"title":"Career Planning and Educational Choices","edition":"","author":"Woodburn Press","note":""},{"title":"Chemistry for Changing Times","edition":"14th","author":"Hill McCreary","note":""},{"title":"Christology: A Global Introduction","edition":"","author":"Karkkainen","note":""},{"title":"City of Dreams","edition":"","author":"Tyler Anbinder","note":""},{"title":"Civil Practice Law and Rules of the State of NY","edition":"","author":"","note":""},{"title":"Cliff Notes Greek Classics","edition":"","author":"","note":""},{"title":"Cliff Notes Mythology","edition":"","author":"","note":""},{"title":"Cliff Notes Roman Classics","edition":"","author":"","note":""},{"title":"College Basics: Plan Your Future","edition":"","author":"Woodburn Press","note":""},{"title":"College Counseling Sourcebook","edition":"5th","author":"College Board","note":""},{"title":"College Handbook","edition":"55th","author":"College Board","note":""},{"title":"College Majors Handbook","edition":"","author":"","note":""},{"title":"Commmunication and Empire","edition":"","author":"Winseck and Pike","note":""},{"title":"Community Mental Health","edition":"","author":"Ritter and Lampkin","note":""},{"title":"Community Policing","edition":"","author":"Millek, Hess and Orthman","note":""},{"title":"Comprehensive Review for the NCLEX-RN Examination","edition":"9th","author":"Silvestri","note":""},{"title":"Consumer Behavior","edition":"11th","author":"Schiffman and Wisenbilt","note":""},{"title":"Core 1000","edition":"","author":"SJU","note":""},{"title":"DAT","edition":"","author":"Kaplan","note":""},{"title":"DAT Prep Plus","edition":"","author":"KAPLAN","note":""},{"title":"Death in Venice","edition":"","author":"Mann","note":""},{"title":"Deluxe Black's Law Dictionary (1891-1991)","edition":"6th","author":"West","note":""},{"title":"Detracking for Excellence and Equity","edition":"","author":"Burris and Garrity","note":""},{"title":"Developmental Education: Meeting Diverse Students Needs","edition":"","author":"Highbee and Dwinell","note":""},{"title":"Dicitonary of Synonyms and Antonyms","edition":"","author":"Miriam Webster","note":""},{"title":"Dictionary","edition":"3rd","author":"American Heritage","note":""},{"title":"Dictionary","edition":"2nd","author":"American Heritage","note":""},{"title":"Dictionary","edition":"","author":"New Webster's","note":""},{"title":"Dictionary","edition":"2nd","author":"Webster's","note":""},{"title":"Discipline with Dignity","edition":"3rd","author":"Curwin, Mendler and Mendler","note":""},{"title":"Double Indemnity","edition":"","author":"James M. Cain","note":""},{"title":"Druge Information Handbook","edition":"6th","author":"Lacy and Armstrong","note":""},{"title":"Education Pyschology","edition":"12th","author":"Woolfolk","note":""},{"title":"Elementary Statistics","edition":"","author":"","note":""},{"title":"Encyclopedia","edition":"2nd","author":"Barron's","note":""},{"title":"English as Second Language Dictionary","edition":"","author":"","note":""},{"title":"Essential Study Skills","edition":"","author":"Linda Wong","note":""},{"title":"Essentials of Coporate Finance","edition":"","author":"","note":""},{"title":"Essentials of Psychological Testing","edition":"2nd","author":"Urbina","note":""},{"title":"Ethics for the Legal Professional","edition":"8th","author":"Orlik","note":""},{"title":"Executive Pharmacy Management","edition":"8th","author":"","note":""},{"title":"Financial and Managerial Accounting","edition":"8th","author":"Needles, Powers and Crosson","note":""},{"title":"French 2","edition":"","author":"St. John's University","note":""},{"title":"French- english Dictionary","edition":"","author":"Harper, Collins and Robert","note":""},{"title":"From Standards to Success","edition":"","author":"O'Shea","note":""},{"title":"Fundamentals of Financial Management","edition":"12th","author":"Brigham and Houston","note":""},{"title":"Getting Financial Aid","edition":"12th","author":"College Board","note":""},{"title":"Getting the Most out of College","edition":"2nd","author":"","note":""},{"title":"Getting the Most out of College","edition":"","author":"Alan Farber, Ph. D","note":""},{"title":"GMAT Premium Plus","edition":"","author":"The Princeton Review","note":""},{"title":"GRE","edition":"","author":"Kaplan","note":""},{"title":"GRE Prep Plus","edition":"","author":"KAPLAN","note":""},{"title":"Health Information:Management of a Strategic Resource","edition":"3rd","author":"Abdelak, Grostick, Hanken and Jacobs","note":""},{"title":"Hedda Gabler","edition":"","author":"Henrik Ibsen","note":""},{"title":"History of the American Economy","edition":"13th","author":"Walton and Rockoff","note":""},{"title":"Honest Work","edition":"3rd","author":"Oxford","note":""},{"title":"How to Get Good Grades in College","edition":"","author":"SJU","note":""},{"title":"How to Get Money For College","edition":"","author":"Woodburn Press","note":""},{"title":"How To Solve Word Problems in Algebra","edition":"","author":"","note":""},{"title":"How to Write Themes and Term Paper","edition":"3rd","author":"","note":""},{"title":"Hunger of Memory: AN Autobiography","edition":"","author":"Richard Rodriguez","note":""},{"title":"Illustrated Medical Dictionary","edition":"","author":"Dorland's","note":""},{"title":"Improve Student Learning One Principle at a Time","edition":"","author":"Pollock and Ford","note":""},{"title":"Inductory Mathematical Analysis","edition":"","author":"Pearson","note":""},{"title":"Inroduction to Pyschology: Schaum's Outline","edition":"","author":"Arno Witting, Ph. D","note":""},{"title":"Integrating Differentiated Instruction","edition":"","author":"Tomilson and McTighe","note":""},{"title":"International Student Handbook","edition":"31st","author":"College Board","note":""},{"title":"Interpersonal Communication","edition":"","author":"Beebe, Beebe and Redmond","note":""},{"title":"Introduction to Sociology","edition":"11th","author":"Giddens, Duneier, Applebaun and Carr","note":""},{"title":"Introduction to the Financial Management of Health Organizations","edition":"5th","author":"Nowicki","note":""},{"title":"Introductory Algebra","edition":"10th","author":"","note":""},{"title":"Key to College Studying","edition":"","author":"Carter Bishop Kravits","note":""},{"title":"King Lear","edition":"","author":"Shakespeare","note":""},{"title":"Laboratory Manual for General Chemistry and Introduction to General and Organic Chemistry","edition":"16th","author":"Neil D. Jespersen","note":""},{"title":"Leading Change in Your School","edition":"","author":"Reeves","note":""},{"title":"Legal Research and Writing for Paralegals","edition":"8th","author":"Bouchoux","note":""},{"title":"Linear Algebra","edition":"","author":"CLIFF's","note":""},{"title":"Literature: An Introduction to Reading and Writing (Compact Edition)","edition":"6th","author":"Roberts and Zweig","note":""},{"title":"LSAT Essay Writing: Strategies and Tactics","edition":"","author":"KAPLAN","note":""},{"title":"LSAT Logic Games, Strategies and Tactics","edition":"","author":"KAPLAN","note":""},{"title":"LSAT Prep Plus","edition":"","author":"KAPLAN","note":""},{"title":"LSAT Reading Comprehension, Stratgeies and Tactics","edition":"","author":"KAPLAN","note":""},{"title":"LSAT Unlocked","edition":"","author":"Kaplan","note":""},{"title":"Macroeconomics","edition":"21st","author":"McConnell, Brue and Flynn","note":""},{"title":"Making it Through College","edition":"","author":"Rajun Persaud","note":""},{"title":"Marketing: An Introduction","edition":"13th","author":"","note":""},{"title":"Mass Communication","edition":"5th","author":"Hanson","note":""},{"title":"Mathematical Ideas","edition":"13th","author":"Miller, heere, Hornsby and Heeren","note":""},{"title":"MCAT AP","edition":"","author":"Kaplan","note":""},{"title":"Medical Dictionary","edition":"","author":"Bantam","note":""},{"title":"Medical, Nursing and Allied Health Dictionary","edition":"","author":"Mosby","note":""},{"title":"MGMT","edition":"Student: 9th","author":"Williams","note":""},{"title":"Microeconomics","edition":"20th","author":"McConnell, Brue and Flynn","note":""},{"title":"Mind Over Math","edition":"","author":"Mc-Graw Hill","note":""},{"title":"MKTG","edition":"Student: 9th","author":"Lamb, Hair and McDaniel","note":""},{"title":"Modern Real Estate Practice in NY for Salespersons","edition":"11th","author":"Irlander","note":""},{"title":"Much Ado About Nothing","edition":"","author":"Shakespeare","note":""},{"title":"Multiple Intelligences in the Classroom","edition":"3rd","author":"Armstrong","note":""},{"title":"Nacada Journal","edition":"Vol 28","author":"Nacada","note":""},{"title":"Nacada Journal","edition":"Vol 26","author":"Nacada","note":""},{"title":"Nacada Journal","edition":"Vol 32","author":"Nacada","note":""},{"title":"Nacada Journal","edition":"Vol 29","author":"Nacada","note":""},{"title":"Nacada Journal","edition":"Vol 30","author":"Nacada","note":""},{"title":"Nacada Journal","edition":"Vol 30","author":"Nacada","note":""},{"title":"Nacada Journal","edition":"Vol 32, 2nd","author":"","note":""},{"title":"Nacada Journal","edition":"Vol 33, 2nd","author":"","note":""},{"title":"Nacada Journal","edition":"Vol 32, 1st","author":"","note":""},{"title":"Nacada Journal","edition":"Vol 26, 2nd","author":"","note":""},{"title":"Nacada Journal","edition":"Vol 29, 2nd","author":"","note":""},{"title":"Never Work Harder than Your Students","edition":"","author":"Jackson","note":""},{"title":"New Direction for Student Services","edition":"","author":"Jossey Bass","note":""},{"title":"New Testament: Psalms and Proverbs","edition":"","author":"","note":""},{"title":"NY Coporation Law Handbook","edition":"","author":"","note":""},{"title":"NY Family Law","edition":"3rd","author":"Schechter","note":""},{"title":"OAT","edition":"","author":"KAPLAN","note":""},{"title":"On Course","edition":"4th","author":"","note":""},{"title":"On Course","edition":"5th","author":"Downing","note":""},{"title":"PCAT Prep Plus","edition":"","author":"KAPLAN","note":""},{"title":"Planethood","edition":"","author":"Ferencz and Keyes","note":""},{"title":"Police Exams Prep","edition":"","author":"KAPLAN","note":""},{"title":"Praxis Prep","edition":"","author":"KAPLAN","note":""},{"title":"Pre-Law Handbook","edition":"","author":"SJU","note":""},{"title":"Precalculus","edition":"","author":"","note":""},{"title":"Prego: AN Invitation to Italians","edition":"8th","author":"Lazzarino","note":""},{"title":"Principles of Risk Managment and Insurance","edition":"","author":"Rejada and McNamara","note":""},{"title":"Promoting Reasonable Expectations","edition":"","author":"","note":""},{"title":"Psychology","edition":"","author":"","note":""},{"title":"Psychology Concepts and Applications","edition":"","author":"","note":""},{"title":"Public Relations Strategies","edition":"","author":"Wilcox, Cameron and Reber","note":""},{"title":"Public Speaking","edition":"","author":"","note":""},{"title":"Readings of Sociology","edition":"9th","author":"Massey and O'Brien","note":""},{"title":"Realizing the Educational Potential of Residence Halls","edition":"","author":"","note":""},{"title":"Reference Library of Black America","edition":"Vol I","author":"","note":""},{"title":"Reference Library of Black America","edition":"Vol II","author":"","note":""},{"title":"Reference Library of Black America","edition":"Vol III","author":"","note":""},{"title":"Reference Library of Black America","edition":"Vol IV","author":"","note":""},{"title":"Reference Library of Black America","edition":"Vol V","author":"","note":""},{"title":"Reference Library of Native North America","edition":"Vol I","author":"","note":""},{"title":"Reference Library of Native North America","edition":"Vol II","author":"","note":""},{"title":"Reference Library of Native North America","edition":"Vol III","author":"","note":""},{"title":"Reference Library of Native North America","edition":"Vol IV","author":"","note":""},{"title":"Scholarship Handbook","edition":"21st","author":"College Board","note":""},{"title":"School Leadership That Works","edition":"","author":"Marzano, Waters and McNulty","note":""},{"title":"Sequoya","edition":"","author":"SJU","note":""},{"title":"Sociology of North American Sports","edition":"","author":"Sage and Eitzen","note":""},{"title":"Spanish College Dictionary","edition":"3rd","author":"Harper Collins","note":""},{"title":"Sport and Public Relations","edition":"3rd","author":"Stolat, Dittmore, Ross and Branvold","note":""},{"title":"Sports in America","edition":"","author":"James A. Michener","note":""},{"title":"Sports in Society: Issues and Controversies","edition":"11th","author":"Coakley","note":""},{"title":"Student Leadership Practices Inventory: Facilitators Guide","edition":"","author":"","note":""},{"title":"Student Leadership Practices Inventory: Student Workbook","edition":"2nd","author":"","note":""},{"title":"Student Success Secrets","edition":"4th","author":"Jensen","note":""},{"title":"Studies in Humanities","edition":"Vol 11 , 2nd","author":"","note":""},{"title":"Sweaty Palms","edition":"","author":"H. Anthony Medley","note":""},{"title":"Teachers College Record","edition":"2nd, Vol 105","author":"","note":""},{"title":"The 4th Revolution","edition":"","author":"Luciano and Floridi","note":""},{"title":"The Best Short Stories of the Modern Age","edition":"","author":"Douglas Angus","note":""},{"title":"The Communist Manifesto","edition":"","author":"Marx and Engels","note":""},{"title":"The Essential Writers Companion","edition":"","author":"Houghton Muffin","note":""},{"title":"The Extraordinary Chemistry of Ordinary Things","edition":"4th","author":"Carl Snyder","note":""},{"title":"The Great Bridge","edition":"","author":"David McCullough","note":""},{"title":"The Great Conversation","edition":"6th","author":"Melchert","note":""},{"title":"The Journey of Metaphysics","edition":"6th","author":"Statile, Gianeli and Kennedy","note":""},{"title":"The Kreutzer Sonata and Other Short Stories","edition":"","author":"Tolstay","note":""},{"title":"The Learning Leader","edition":"","author":"Reeves","note":""},{"title":"The Legal Environment of Business","edition":"","author":"","note":""},{"title":"The Many Faces of Developmental Education","edition":"","author":"Highbee and Dwinell","note":""},{"title":"The Merck Manual of Medical Information","edition":"`","author":"Merck","note":""},{"title":"The Mismeasure of Man","edition":"","author":"Stephen Jay Gould","note":""},{"title":"The New Miriam Webster Dictionary","edition":"","author":"Miriam Webster","note":""},{"title":"The Political Economy of Communications","edition":"2nd","author":"Vincent Mosco","note":""},{"title":"The Practical Stylist","edition":"","author":"Baker","note":""},{"title":"The Rectangle","edition":"Vol 83","author":"","note":""},{"title":"The Spirit of Enthusiasm","edition":"","author":"Susan A. Maurer","note":""},{"title":"The Steps I Took","edition":"","author":"Griffin","note":""},{"title":"The Teaching of Christ","edition":"","author":"","note":""},{"title":"Thesaurus","edition":"2nd","author":"Rogerts","note":""},{"title":"Thesaurus","edition":"","author":"Miriam Webster","note":""},{"title":"Transforming Global Information and Communication Markets","edition":"","author":"Cowhey and Aronson","note":""},{"title":"True Beauty for Women of Discretion Workbook","edition":"","author":"Denise Miller","note":""},{"title":"Walk In Their Shoes","edition":"","author":"Ziolkowski and Hirsch","note":""},{"title":"What Matters in College","edition":"","author":"Alexander Austin","note":""},{"title":"World History","edition":"8th","author":"Duiker and Spielvogel","note":""},{"title":"World History","edition":"9th/ Vol. 2","author":"Duiker and Spielvogel","note":""},{"title":"Enfleshing Freedom Body, Race, and Being","edition":"","author":"M. Shawn Copeland","note":""},{"title":"An Introduction to Business Ethics","edition":"5th","author":"Joseph DesJardins","note":""},{"title":"Hospitality Services Food & Lodging","edition":"blue cover","author":"Johnny Sue Reynolds","note":""},{"title":"Speakers Books","edition":"","author":"","note":""},{"title":"You Can Win Being You!","edition":"4th","author":"Mills Rodgers II","note":""},{"title":"We Fall Up","edition":"","author":"Yvonne Marie Rodgers","note":""}];
+
+const tbody = document.getElementById('book-table');
+const searchInput = document.getElementById('search-input');
+const clearBtn = document.getElementById('clear-btn');
+const noResults = document.getElementById('no-results');
+const resultsInfo = document.getElementById('results-info');
+const shownCount = document.getElementById('shown-count');
+
+function renderBooks(books) {
+  tbody.innerHTML = books.map(b => `
+    <tr>
+      <td>${b.title}${b.note ? ` <span class="note-badge">${b.note}</span>` : ''}</td>
+      <td style="color:var(--text-light)">${b.author || '—'}</td>
+      <td>${b.edition ? `<span class="edition-badge">${b.edition}</span>` : '—'}</td>
+    </tr>`).join('');
+  shownCount.textContent = books.length;
+  resultsInfo.innerHTML = `Showing <strong>${books.length}</strong> of ${BOOKS.length} textbooks`;
+  noResults.style.display = books.length === 0 ? 'block' : 'none';
+  tbody.style.display = books.length === 0 ? 'none' : '';
+}
+
+function filterBooks() {
+  const q = searchInput.value.toLowerCase().trim();
+  clearBtn.classList.toggle('visible', q.length > 0);
+  const filtered = q ? BOOKS.filter(b =>
+    b.title.toLowerCase().includes(q) ||
+    b.author.toLowerCase().includes(q) ||
+    b.edition.toLowerCase().includes(
