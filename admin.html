@@ -906,8 +906,12 @@ const API_URL = 'https://script.google.com/macros/s/AKfycbzywDyjo1Sh1ub2Ku5u4fQe
 const CACHE = { guides:[], newsletters:[], spotlights:[], opportunities:[], upcoming:[], past:[], textbooks:[], scholarships:[] };
 
 async function apiCall(params) {
-  const url = API_URL + '?' + new URLSearchParams(params).toString();
-  const res = await fetch(url);
+  // Use POST for everything to avoid URL length limits with large HTML content
+  const res = await fetch(API_URL, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    body: new URLSearchParams(params).toString()
+  });
   if (!res.ok) throw new Error('Network error: ' + res.status);
   return res.json();
 }
@@ -915,7 +919,10 @@ async function apiCall(params) {
 async function loadFromSheets(key) {
   try {
     showLoading(key);
-    const result = await apiCall({ action: 'getAll', sheet: key });
+    // GET is fine for loading since there's no large payload
+    const url = API_URL + '?' + new URLSearchParams({ action: 'getAll', sheet: key }).toString();
+    const res = await fetch(url);
+    const result = await res.json();
     CACHE[key] = (result.data || []).map(item => ({ ...item, _id: item.id }));
     return CACHE[key];
   } catch(e) {
@@ -927,13 +934,25 @@ async function loadFromSheets(key) {
 
 async function saveToSheets(key, item, isEdit) {
   const params = { action: isEdit ? 'update' : 'add', sheet: key, ...item, id: item._id || item.id || genId() };
-  const result = await apiCall(params);
+  const res = await fetch(API_URL, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    body: new URLSearchParams(params).toString()
+  });
+  if (!res.ok) throw new Error('Network error: ' + res.status);
+  const result = await res.json();
   if (result.error) throw new Error(result.error);
   return result;
 }
 
 async function deleteFromSheets(key, id) {
-  const result = await apiCall({ action: 'delete', sheet: key, id: id });
+  const res = await fetch(API_URL, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    body: new URLSearchParams({ action: 'delete', sheet: key, id: id }).toString()
+  });
+  if (!res.ok) throw new Error('Network error: ' + res.status);
+  const result = await res.json();
   if (result.error) throw new Error(result.error);
   return result;
 }
