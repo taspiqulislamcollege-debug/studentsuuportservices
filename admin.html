@@ -410,6 +410,7 @@
     <button class="nav-item" onclick="switchTab('spotlights', this)">⭐ Spotlights <span class="nav-count" id="count-spotlights">0</span></button>
     <button class="nav-item" onclick="switchTab('opportunities', this)">🚀 Opportunities <span class="nav-count" id="count-opportunities">0</span></button>
     <button class="nav-item" onclick="switchTab('textbooks', this)">📚 Textbooks <span class="nav-count" id="count-textbooks">0</span></button>
+    <button class="nav-item" onclick="switchTab('scholarships', this)">🎓 Scholarships <span class="nav-count" id="count-scholarships">0</span></button>
 
     <div class="sidebar-label">Events</div>
     <button class="nav-item" onclick="switchTab('upcoming', this)">📅 Upcoming Events <span class="nav-count" id="count-upcoming">0</span></button>
@@ -489,6 +490,18 @@
         <button class="btn-primary" onclick="openModal('textbook')">+ Add Textbook</button>
       </div>
       <div id="list-textbooks"></div>
+    </div>
+
+    <!-- SCHOLARSHIPS -->
+    <div class="tab-panel" id="tab-scholarships">
+      <div class="page-header">
+        <div>
+          <h1>Scholarships</h1>
+          <p>Add external scholarships for students to browse. Include deadline, amount, major, and eligibility so filters work correctly.</p>
+        </div>
+        <button class="btn-primary" onclick="openModal('scholarship')">+ Add Scholarship</button>
+      </div>
+      <div class="items-grid" id="list-scholarships"></div>
     </div>
 
     <!-- UPCOMING EVENTS -->
@@ -778,6 +791,64 @@
   </div>
 </div>
 
+<!-- SCHOLARSHIP MODAL -->
+<div class="modal-overlay" id="modal-scholarship">
+  <div class="modal">
+    <div class="modal-header">
+      <h2 id="modal-scholarship-title">Add Scholarship</h2>
+      <button class="modal-close" onclick="closeModal('scholarship')">✕</button>
+    </div>
+    <div class="form-group">
+      <label>Scholarship Name *</label>
+      <input type="text" id="scholarship-name" placeholder="e.g. Gates Scholarship" />
+    </div>
+    <div class="form-row">
+      <div class="form-group">
+        <label>Award Amount</label>
+        <input type="text" id="scholarship-amount" placeholder="e.g. $5,000 or Varies" />
+      </div>
+      <div class="form-group">
+        <label>Deadline</label>
+        <input type="date" id="scholarship-deadline" />
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group">
+        <label>Major / Field</label>
+        <select id="scholarship-major">
+          <option value="any">Open to All Majors</option>
+          <option value="business">Business</option>
+          <option value="stem">STEM</option>
+          <option value="health">Health Sciences</option>
+          <option value="education">Education</option>
+          <option value="law">Law / Pre-Law</option>
+          <option value="arts">Arts & Humanities</option>
+          <option value="social">Social Sciences</option>
+          <option value="communications">Communications</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Eligibility</label>
+        <input type="text" id="scholarship-eligibility" placeholder="e.g. First-Gen, Low-Income, GPA 3.0+" />
+        <p class="form-hint">Separate multiple with commas</p>
+      </div>
+    </div>
+    <div class="form-group">
+      <label>Description</label>
+      <textarea id="scholarship-desc" placeholder="Brief description of the scholarship and requirements..." style="min-height:80px;"></textarea>
+    </div>
+    <div class="form-group">
+      <label>Application URL</label>
+      <input type="url" id="scholarship-url" placeholder="https://..." />
+    </div>
+    <input type="hidden" id="scholarship-edit-id" value="" />
+    <div class="form-actions">
+      <button class="btn-cancel" onclick="closeModal('scholarship')">Cancel</button>
+      <button class="btn-primary" onclick="saveItem('scholarship')">💾 Save Scholarship</button>
+    </div>
+  </div>
+</div>
+
 <!-- TEXTBOOK MODAL -->
 <div class="modal-overlay" id="modal-textbook">
   <div class="modal">
@@ -832,7 +903,7 @@
 const API_URL = 'https://script.google.com/macros/s/AKfycbzywDyjo1Sh1ub2Ku5u4fQe3PQvI8K5SI2cAmWaevcwgNzqfHnWxu0M05_FINN3rc3KBw/exec';
 
 // In-memory cache so the UI stays fast
-const CACHE = { guides:[], newsletters:[], spotlights:[], opportunities:[], upcoming:[], past:[], textbooks:[] };
+const CACHE = { guides:[], newsletters:[], spotlights:[], opportunities:[], upcoming:[], past:[], textbooks:[], scholarships:[] };
 
 async function apiCall(params) {
   const url = API_URL + '?' + new URLSearchParams(params).toString();
@@ -950,6 +1021,7 @@ async function renderTab(name) {
     case 'upcoming':
     case 'past':
     case 'textbooks':
+    case 'scholarships':
       await loadFromSheets(name);
       renderList(name);
       updateCounts();
@@ -999,7 +1071,7 @@ function renderDashboard() {
 }
 
 function updateCounts() {
-  ['guides','newsletters','spotlights','opportunities','upcoming','past','textbooks'].forEach(key => {
+  ['guides','newsletters','spotlights','opportunities','upcoming','past','textbooks','scholarships'].forEach(key => {
     const el = document.getElementById('count-' + key);
     if (el) el.textContent = load(key).length;
   });
@@ -1010,7 +1082,7 @@ function updateCounts() {
 // ══════════════════════════════════════════════
 const ICONS = {
   guides: '📖', newsletters: '📰', spotlights: '⭐',
-  opportunities: '🚀', upcoming: '📅', past: '🗂', textbooks: '📚'
+  opportunities: '🚀', upcoming: '📅', past: '🗂', textbooks: '📚', scholarships: '🎓'
 };
 
 function renderList(key) {
@@ -1068,6 +1140,16 @@ function renderItem(key, item) {
   const sub = item.cat || item.type || item.date || item.tags || '';
 
   let extraBadge = '';
+
+  if (key === 'scholarships') {
+    const today = new Date();
+    const due = item.deadline ? new Date(item.deadline) : null;
+    const days = due ? Math.ceil((due - today) / (1000*60*60*24)) : null;
+    const urgency = days !== null && days <= 30 ? 'red' : days !== null && days <= 60 ? 'gold' : 'green';
+    extraBadge = `<span class="item-badge ${urgency}">${item.amount || 'Varies'}</span>
+      <span class="item-badge">${item.major || 'Any Major'}</span>
+      ${due ? `<span class="item-badge ${urgency}">${days >= 0 ? days + 'd left' : 'Passed'}</span>` : '<span class="item-badge">Rolling</span>'}`;
+  }
   if (key === 'guides') extraBadge = `<span class="item-badge ${item.cat === 'career' ? 'red' : item.cat === 'finance' ? 'gold' : 'green'}">${item.cat}</span>`;
   if (key === 'upcoming') extraBadge = `<span class="item-badge green">${item.date || ''}</span><span class="item-badge">${item.location || ''}</span>`;
   if (key === 'past') extraBadge = `<span class="item-badge">${item.date || ''}</span>`;
@@ -1084,9 +1166,9 @@ function renderItem(key, item) {
       <div class="item-meta">${extraBadge}</div>
     </div>
     <div class="item-actions">
-      ${hasHTML ? `<button class="btn-edit" onclick="viewHTML('${key}','${item._id}')">👁 Preview</button>` : ''}
-      <button class="btn-edit" onclick="editItem('${key}','${item._id}')">✏️ Edit</button>
-      <button class="btn-danger" onclick="deleteItem('${key}','${item._id}')">🗑 Delete</button>
+      ${hasHTML ? `<button class="btn-edit" onclick="viewHTML('${key}','${item._id||item.id}')">👁 Preview</button>` : ''}
+      <button class="btn-edit" onclick="editItem('${key}','${item._id||item.id}')">✏️ Edit</button>
+      <button class="btn-danger" onclick="deleteItem('${key}','${item._id||item.id}')">🗑 Delete</button>
     </div>
   </div>`;
 }
@@ -1116,13 +1198,14 @@ function modalKey(type) {
   if (type === 'event-upcoming') return 'upcoming';
   if (type === 'event-past') return 'past';
   if (type === 'textbook') return 'textbooks';
+  if (type === 'scholarship') return 'scholarships';
   return type + 's';
 }
 
 function modalLabel(type) {
   const labels = { guide:'How-To Guide', newsletter:'Newsletter', spotlight:'Student Spotlight',
     opportunity:'Opportunity', 'event-upcoming':'Upcoming Event', 'event-past':'Past Event',
-    textbook:'Textbook' };
+    textbook:'Textbook', scholarship:'Scholarship' };
   return labels[type] || type;
 }
 
@@ -1164,6 +1247,11 @@ function populateModal(type, item) {
     set('textbook-title', item.title); set('textbook-author', item.author);
     set('textbook-edition', item.edition); set('textbook-note', item.note);
     set('textbook-edit-id', item._id || item.id);
+  } else if (type === 'scholarship') {
+    set('scholarship-name', item.name); set('scholarship-amount', item.amount);
+    set('scholarship-deadline', item.deadline); set('scholarship-major', item.major);
+    set('scholarship-eligibility', item.eligibility); set('scholarship-desc', item.desc);
+    set('scholarship-url', item.url); set('scholarship-edit-id', item._id || item.id);
   }
 }
 
@@ -1198,6 +1286,9 @@ async function saveItem(type) {
   } else if (type === 'textbook') {
     if (!g('textbook-title')) { alert('Please enter a title.'); return; }
     item = { title: g('textbook-title'), author: g('textbook-author'), edition: g('textbook-edition'), note: g('textbook-note') };
+  } else if (type === 'scholarship') {
+    if (!g('scholarship-name')) { alert('Please enter a scholarship name.'); return; }
+    item = { name: g('scholarship-name'), amount: g('scholarship-amount'), deadline: g('scholarship-deadline'), major: g('scholarship-major'), eligibility: g('scholarship-eligibility'), desc: g('scholarship-desc'), url: g('scholarship-url') };
   }
 
   item._id = editId || genId();
@@ -1236,7 +1327,8 @@ async function saveItem(type) {
 // ══════════════════════════════════════════════
 function editItem(key, id) {
   const typeMap = { guides:'guide', newsletters:'newsletter', spotlights:'spotlight',
-    opportunities:'opportunity', upcoming:'event-upcoming', past:'event-past', textbooks:'textbook' };
+    opportunities:'opportunity', upcoming:'event-upcoming', past:'event-past',
+    textbooks:'textbook', scholarships:'scholarship' };
   openModal(typeMap[key], id);
 }
 
