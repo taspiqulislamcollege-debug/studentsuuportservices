@@ -405,6 +405,7 @@
     <button class="nav-item active" onclick="switchTab('dashboard', this)">📊 Dashboard</button>
 
     <div class="sidebar-label">Content</div>
+    <button class="nav-item" onclick="switchTab('team', this)">👥 Meet the Team <span class="nav-count" id="count-team">0</span></button>
     <button class="nav-item" onclick="switchTab('guides', this)">📖 How-To Guides <span class="nav-count" id="count-guides">0</span></button>
     <button class="nav-item" onclick="switchTab('newsletters', this)">📰 Newsletters <span class="nav-count" id="count-newsletters">0</span></button>
     <button class="nav-item" onclick="switchTab('spotlights', this)">⭐ Spotlights <span class="nav-count" id="count-spotlights">0</span></button>
@@ -430,6 +431,18 @@
       </div>
       <div class="stats-bar" id="dashboard-stats"></div>
       <div id="dashboard-recent"></div>
+    </div>
+
+    <!-- TEAM -->
+    <div class="tab-panel" id="tab-team">
+      <div class="page-header">
+        <div>
+          <h1>Meet the Team</h1>
+          <p>Add, edit, or remove staff members shown on the website.</p>
+        </div>
+        <button class="btn-primary" onclick="openModal('team')">+ Add Team Member</button>
+      </div>
+      <div class="items-grid" id="list-team"></div>
     </div>
 
     <!-- GUIDES -->
@@ -532,6 +545,31 @@
 </div>
 
 <!-- ═══════════════════ MODALS ═══════════════════ -->
+
+<!-- TEAM MODAL -->
+<div class="modal-overlay" id="modal-team">
+  <div class="modal">
+    <div class="modal-header">
+      <h2 id="modal-team-title">Add Team Member</h2>
+      <button class="modal-close" onclick="closeModal('team')">✕</button>
+    </div>
+    <input type="hidden" id="team-edit-id">
+    <label>Name *</label>
+    <input type="text" id="team-name" placeholder="e.g. Jane Smith">
+    <label>Role / Title *</label>
+    <input type="text" id="team-role" placeholder="e.g. Program Director">
+    <label>Email</label>
+    <input type="email" id="team-email" placeholder="e.g. jsmith@stjohns.edu">
+    <label>Bio (optional)</label>
+    <textarea id="team-bio" rows="3" placeholder="Short description about this person..."></textarea>
+    <label>Emoji (optional)</label>
+    <input type="text" id="team-emoji" placeholder="e.g. 👩‍💼 (one emoji)">
+    <div class="modal-footer">
+      <button class="btn-secondary" onclick="closeModal('team')">Cancel</button>
+      <button class="btn-primary" onclick="saveItem('team')">💾 Save</button>
+    </div>
+  </div>
+</div>
 
 <!-- GUIDE MODAL -->
 <div class="modal-overlay" id="modal-guide">
@@ -903,7 +941,7 @@
 const API_URL = 'https://script.google.com/macros/s/AKfycbzywDyjo1Sh1ub2Ku5u4fQe3PQvI8K5SI2cAmWaevcwgNzqfHnWxu0M05_FINN3rc3KBw/exec';
 
 // In-memory cache so the UI stays fast
-const CACHE = { guides:[], newsletters:[], spotlights:[], opportunities:[], upcoming:[], past:[], textbooks:[], scholarships:[] };
+const CACHE = { guides:[], newsletters:[], spotlights:[], opportunities:[], upcoming:[], past:[], textbooks:[], scholarships:[], team:[] };
 
 async function apiCall(params) {
   // Use POST for everything to avoid URL length limits with large HTML content
@@ -1041,6 +1079,7 @@ async function renderTab(name) {
     case 'past':
     case 'textbooks':
     case 'scholarships':
+    case 'team':
       await loadFromSheets(name);
       renderList(name);
       updateCounts();
@@ -1090,7 +1129,7 @@ function renderDashboard() {
 }
 
 function updateCounts() {
-  ['guides','newsletters','spotlights','opportunities','upcoming','past','textbooks','scholarships'].forEach(key => {
+  ['guides','newsletters','spotlights','opportunities','upcoming','past','textbooks','scholarships','team'].forEach(key => {
     const el = document.getElementById('count-' + key);
     if (el) el.textContent = load(key).length;
   });
@@ -1101,7 +1140,7 @@ function updateCounts() {
 // ══════════════════════════════════════════════
 const ICONS = {
   guides: '📖', newsletters: '📰', spotlights: '⭐',
-  opportunities: '🚀', upcoming: '📅', past: '🗂', textbooks: '📚', scholarships: '🎓'
+  opportunities: '🚀', upcoming: '📅', past: '🗂', textbooks: '📚', scholarships: '🎓', team: '👥'
 };
 
 function renderList(key) {
@@ -1218,13 +1257,14 @@ function modalKey(type) {
   if (type === 'event-past') return 'past';
   if (type === 'textbook') return 'textbooks';
   if (type === 'scholarship') return 'scholarships';
+  if (type === 'team') return 'team';
   return type + 's';
 }
 
 function modalLabel(type) {
   const labels = { guide:'How-To Guide', newsletter:'Newsletter', spotlight:'Student Spotlight',
     opportunity:'Opportunity', 'event-upcoming':'Upcoming Event', 'event-past':'Past Event',
-    textbook:'Textbook', scholarship:'Scholarship' };
+    textbook:'Textbook', scholarship:'Scholarship', team:'Team Member' };
   return labels[type] || type;
 }
 
@@ -1271,6 +1311,10 @@ function populateModal(type, item) {
     set('scholarship-deadline', item.deadline); set('scholarship-major', item.major);
     set('scholarship-eligibility', item.eligibility); set('scholarship-desc', item.desc);
     set('scholarship-url', item.url); set('scholarship-edit-id', item._id || item.id);
+  } else if (type === 'team') {
+    set('team-name', item.name); set('team-role', item.role);
+    set('team-email', item.email); set('team-bio', item.bio);
+    set('team-emoji', item.emoji); set('team-edit-id', item._id || item.id);
   }
 }
 
@@ -1308,6 +1352,9 @@ async function saveItem(type) {
   } else if (type === 'scholarship') {
     if (!g('scholarship-name')) { alert('Please enter a scholarship name.'); return; }
     item = { name: g('scholarship-name'), amount: g('scholarship-amount'), deadline: g('scholarship-deadline'), major: g('scholarship-major'), eligibility: g('scholarship-eligibility'), desc: g('scholarship-desc'), url: g('scholarship-url') };
+  } else if (type === 'team') {
+    if (!g('team-name')) { alert('Please enter a name.'); return; }
+    item = { name: g('team-name'), role: g('team-role'), email: g('team-email'), bio: g('team-bio'), emoji: g('team-emoji') };
   }
 
   item._id = editId || genId();
@@ -1347,7 +1394,7 @@ async function saveItem(type) {
 function editItem(key, id) {
   const typeMap = { guides:'guide', newsletters:'newsletter', spotlights:'spotlight',
     opportunities:'opportunity', upcoming:'event-upcoming', past:'event-past',
-    textbooks:'textbook', scholarships:'scholarship' };
+    textbooks:'textbook', scholarships:'scholarship', team:'team' };
   openModal(typeMap[key], id);
 }
 

@@ -1221,6 +1221,21 @@
     </div>
   </div>
 
+  <!-- MEET THE TEAM -->
+  <section id="meet-the-team">
+    <div class="section-header">
+      <div>
+        <p class="section-label">Our Staff</p>
+        <h2 class="section-title">Meet the <em>Team</em></h2>
+        <p class="section-desc">The people behind SSS — here to support you every step of the way.</p>
+      </div>
+    </div>
+    <hr class="section-divider">
+    <div class="program-grid" id="team-grid" style="margin-top:24px;">
+      <p style="color:var(--text-light);font-size:14px;" id="team-empty">Loading team...</p>
+    </div>
+  </section>
+
   <!-- ABOUT SSS -->
   <section id="about">
     <div class="section-header">
@@ -1252,6 +1267,7 @@
         <div class="tile-body">
           <h3>Printing & Computer Lab</h3>
           <p>Access our dedicated computer lab and free printing services.</p>
+          <p style="font-size:13px;margin-top:6px;">📍 St. John's Hall, Room 107A</p>
         </div>
       </div>
       <div class="program-tile">
@@ -1259,6 +1275,7 @@
         <div class="tile-body">
           <h3>Study Rooms</h3>
           <p>Reserve private and group study rooms for focused work.</p>
+          <p style="font-size:13px;margin-top:6px;">📍 St. John's Hall, Room 103B</p>
         </div>
       </div>
       <div class="program-tile">
@@ -1268,7 +1285,7 @@
           <p>One-on-one meetings with a dedicated SSS academic advisor.</p>
         </div>
       </div>
-      <div class="program-tile">
+      <div class="program-tile" style="cursor:pointer;" onclick="document.getElementById('grants-modal').classList.add('open')">
         <div class="tile-icon tile-gold">💰</div>
         <div class="tile-body">
           <h3>Tuition Support Grants</h3>
@@ -1291,8 +1308,574 @@
       </div>
     </div>
   </section>
+  <section id="upcoming-events">
+    <div class="section-header">
+      <div>
+        <p class="section-label">This Semester</p>
+        <h2 class="section-title">Upcoming <em>Events</em></h2>
+        <p class="section-desc">Workshops, excursions, and programs happening soon. Attend at least 3 per semester!</p>
+      </div>
+    </div>
+    <hr class="section-divider">
+    <div class="program-grid" style="margin-top:24px;" id="upcoming-events-grid">
+      <div style="text-align:center;padding:40px;color:var(--text-light);font-size:14px);grid-column:1/-1;">
+        <div style="font-size:32px;margin-bottom:10px;">📅</div>
+        <p>Upcoming events will appear here. Check back soon!</p>
+      </div>
+    </div>
+  </section>
+  <section id="resources">
+    <div class="section-header">
+      <div>
+        <p class="section-label">St. John's University</p>
+        <h2 class="section-title">Campus <em>Resources</em></h2>
+        <p class="section-desc">Everything you need at St. John's — academic support, wellness, jobs, and more all in one place.</p>
+      </div>
+    </div>
+    <hr class="section-divider">
 
-  <!-- SCHOLARSHIP SUPPORT -->
+    <div style="display:grid;gap:28px;margin-top:24px;">
+
+      <!-- ALL IN ONE -->
+      <div>
+        <p style="font-size:11px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--red);margin-bottom:12px;">🔗 All-in-One</p>
+        <div class="resource-grid">
+          <a href="https://linktr.ee/StJohnsNow?utm_source=linktree_profile_share&ltsid=5c62e73f-2692-42bf-944e-1c768b677058" target="_blank" rel="noopener" class="resource-card">
+            <div class="resource-icon">🌐</div>
+            <div class="resource-info"><h3>St. John's Linktree</h3><p>All St. John's links in one place — the ultimate quick-access hub.</p></div>
+            <span class="resource-arrow">→</span>
+          </a>
+          <a href="https://signon.stjohns.edu/" target="_blank" rel="noopener" class="resource-card">
+            <div class="resource-icon">🔐</div>
+            <div class="resource-info"><h3>St. John's Sign On</h3><p>Access your email, Canvas, and all SJU platforms in one login.</p></div>
+            <span class="resource-arrow">→</span>
+          </a>
+          <a href="https://experience.elluciancloud.com/sjusaasproduction" target="_blank" rel="noopener" class="resource-card">
+            <div class="resource-icon">💻</div>
+            <div class="resource-info"><h3>New UIS Experience</h3><p>The new student information system for registration, records, and more.</p></div>
+            <span class="resource-arrow">→</span>
+          </a>
+          <a href="https://www.stjohns.edu/who-we-are/faith-mission-ministry/help-basic-needs" target="_blank" rel="noopener" class="resource-card">
+            <div class="resource-icon">🤝</div>
+            <div class="resource-info"><h3>Basic Needs Resources</h3><p>Food, housing, financial, and emergency support resources at SJU.</p></div>
+            <span class="resource-arrow">→</span>
+          </a>
+          <div class="resource-card" style="cursor:pointer;" onclick="document.getElementById('deans-modal').classList.add('open')">
+            <div class="resource-icon">🎓</div>
+            <div class="resource-info"><h3>Deans & Academic Offices</h3><p>Contact info for all St. John's deans, advising offices, and college departments.</p></div>
+            <span class="resource-arrow">→</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ACADEMIC SUPPORT -->
+      <div>
+        <p style="font-size:11px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--red);margin-bottom:12px;">📐 Academic Support</p>
+        <div class="resource-grid">
+          <a href="https://ulc.mywconline.com/" target="_blank" rel="noopener" class="resource-card">
+            <div class="resource-icon">📐</div>
+            <div class="resource-info"><h3>University Learning Commons</h3><p>Free tutoring appointments for all subjects.</p></div>
+            <span class="resource-arrow">→</span>
+          </a>
+          <a href="https://stj.mywconline.com/" target="_blank" rel="noopener" class="resource-card">
+            <div class="resource-icon">✍️</div>
+            <div class="resource-info"><h3>Writing Center</h3><p>Get help with essays, research papers, and personal statements.</p></div>
+            <span class="resource-arrow">→</span>
+          </a>
+          <a href="https://www.stjohns.edu/academics/office-registrar/academic-calendar" target="_blank" rel="noopener" class="resource-card">
+            <div class="resource-icon">📅</div>
+            <div class="resource-info"><h3>Academic Calendar</h3><p>Key dates — registration, finals, breaks, and deadlines.</p></div>
+            <span class="resource-arrow">→</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- MENTORING PROGRAMS -->
+      <div>
+        <p style="font-size:11px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--red);margin-bottom:12px;">🌱 Mentoring & Support Programs</p>
+        <div class="resource-grid">
+          <a href="#" class="resource-card">
+            <div class="resource-icon">🌱</div>
+            <div class="resource-info"><h3>RISE Mentoring</h3><p>Peer mentoring connecting students with upperclassmen and professionals.</p></div>
+            <span class="resource-arrow">→</span>
+          </a>
+          <a href="#" class="resource-card">
+            <div class="resource-icon">🔬</div>
+            <div class="resource-info"><h3>CSTEP</h3><p>Collegiate Science and Technology Entry Program for STEM students.</p></div>
+            <span class="resource-arrow">→</span>
+          </a>
+          <a href="#" class="resource-card">
+            <div class="resource-icon">🎓</div>
+            <div class="resource-info"><h3>McNair Scholars</h3><p>Federal TRIO program preparing first-gen students for doctoral study.</p></div>
+            <span class="resource-arrow">→</span>
+          </a>
+          <a href="#" class="resource-card">
+            <div class="resource-icon">⚡</div>
+            <div class="resource-info"><h3>EPIC Mentoring</h3><p>Leadership and professional development mentoring program.</p></div>
+            <span class="resource-arrow">→</span>
+          </a>
+          <a href="#" class="resource-card">
+            <div class="resource-icon">🚀</div>
+            <div class="resource-info"><h3>Aspire Mentoring</h3><p>One-on-one mentoring focused on academic success and career readiness.</p></div>
+            <span class="resource-arrow">→</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- WELLNESS -->
+      <div>
+        <p style="font-size:11px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--red);margin-bottom:12px;">🧠 Wellness & Health Services</p>
+        <div class="resource-grid">
+
+          <a href="https://www.stjohns.edu/life-st-johns/health-and-wellness/student-health-services" target="_blank" rel="noopener" class="resource-card">
+            <div class="resource-icon">🏥</div>
+            <div class="resource-info">
+              <h3>Student Health Services (SHS)</h3>
+              <p>Free & confidential medical care to diagnose, treat, and manage minor illness and injuries.</p>
+              <p style="font-size:12px;margin-top:4px;">📍 DaSilva Hall (Rear Entrance across from Donovan Hall)</p>
+              <p style="font-size:12px;">📞 718-990-6360 &nbsp;|&nbsp; 🚨 Emergency: 718-990-5252</p>
+            </div>
+            <span class="resource-arrow">→</span>
+          </a>
+
+          <a href="https://www.stjohns.edu/life-st-johns/health-and-wellness/center-counseling-and-consultation" target="_blank" rel="noopener" class="resource-card">
+            <div class="resource-icon">🧠</div>
+            <div class="resource-info">
+              <h3>Center for Counseling & Consultation (CCC)</h3>
+              <p>Free & confidential mental health services in a nonjudgmental space. Virtual appointments available.</p>
+              <p style="font-size:12px;margin-top:4px;">📍 Marillac Hall, Room 130</p>
+              <p style="font-size:12px;">📞 718-990-6384 &nbsp;|&nbsp; 🆘 24/7 Mental Health Helpline: 718-990-6352</p>
+            </div>
+            <span class="resource-arrow">→</span>
+          </a>
+
+          <a href="https://www.stjohns.edu/life-st-johns/health-and-wellness/sexual-assault-you-are-not-alone" target="_blank" rel="noopener" class="resource-card">
+            <div class="resource-icon">💜</div>
+            <div class="resource-info">
+              <h3>Sexual Violence Outreach, Awareness & Response (SOAR)</h3>
+              <p>Trainings, workshops, and confidential support for survivors. Events: Take Back The Night (Oct) & Turn Off The Violence (Apr).</p>
+              <p style="font-size:12px;margin-top:4px;">📞 Campus Support Advisor: 718-990-8484</p>
+              <p style="font-size:12px;">✉️ soar@stjohns.edu &nbsp;|&nbsp; 📸 @soar_sju</p>
+            </div>
+            <span class="resource-arrow">→</span>
+          </a>
+
+          <a href="https://www.stjohns.edu/life-st-johns/health-and-wellness/office-disability-services" target="_blank" rel="noopener" class="resource-card">
+            <div class="resource-icon">♿</div>
+            <div class="resource-info">
+              <h3>Office of Disability Services (ODS)</h3>
+              <p>Reasonable accommodations for students with permanent & temporary disabilities — extended exam time, assistive technology, ASL interpreters, accessible housing & more.</p>
+              <p style="font-size:12px;margin-top:4px;">📍 Marillac Hall, Room 134</p>
+              <p style="font-size:12px;">📞 718-990-6867 &nbsp;|&nbsp; ✉️ ods@stjohns.edu</p>
+            </div>
+            <span class="resource-arrow">→</span>
+          </a>
+
+          <a href="https://www.stjohns.edu/life-st-johns/campus-recreation" target="_blank" rel="noopener" class="resource-card">
+            <div class="resource-icon">🏋️</div>
+            <div class="resource-info">
+              <h3>Campus Recreation (CREC)</h3>
+              <p>Carnesecca Fitness Center: cardio & strength machines, free weights, stretch area, fitness classes & personal training. Taffner Field House: intramurals, open rec, club sports — basketball, soccer, volleyball & more.</p>
+              <p style="font-size:12px;margin-top:4px;">📞 718-990-5810 &nbsp;|&nbsp; 📸 @stjohnscrec</p>
+            </div>
+            <span class="resource-arrow">→</span>
+          </a>
+
+          <a href="https://www.stjohns.edu/life-st-johns/health-and-wellness/wellness-education-and-prevention" target="_blank" rel="noopener" class="resource-card">
+            <div class="resource-icon">🌿</div>
+            <div class="resource-info">
+              <h3>Wellness Education & Prevention</h3>
+              <p>Workshops on stress & time management, alcohol & other drugs, mindfulness, suicide prevention, mental health, sleep & more. Plus 1-on-1 wellness coaching.</p>
+              <p style="font-size:12px;margin-top:4px;">✉️ swell@stjohns.edu &nbsp;|&nbsp; 📸 @stjohnswellness</p>
+            </div>
+            <span class="resource-arrow">→</span>
+          </a>
+
+          <a href="https://www.stjohns.edu/academics/centers-institutes/inclusivity-resource-center" target="_blank" rel="noopener" class="resource-card">
+            <div class="resource-icon">🌈</div>
+            <div class="resource-info">
+              <h3>Inclusivity Resource Center (IRC)</h3>
+              <p>A safe, inclusive space with programs, resources, and events that promote equity, belonging, and student support.</p>
+            </div>
+            <span class="resource-arrow">→</span>
+          </a>
+
+        </div>
+      </div>
+
+      <!-- JOBS & OPPORTUNITIES -->
+      <div>
+        <p style="font-size:11px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--red);margin-bottom:12px;">💼 Jobs & Opportunities</p>
+        <div class="resource-grid">
+          <a href="https://stjohns.joinhandshake.com/login" target="_blank" rel="noopener" class="resource-card">
+            <div class="resource-icon">💼</div>
+            <div class="resource-info"><h3>Handshake</h3><p>Find internships, jobs, and career events tailored to SJU students.</p></div>
+            <span class="resource-arrow">→</span>
+          </a>
+          <a href="https://www.stjohns.edu/about/leadership-and-administration/administrative-offices/human-resources/recruitment/student-employment" target="_blank" rel="noopener" class="resource-card">
+            <div class="resource-icon">🏫</div>
+            <div class="resource-info"><h3>Student Employment at SJU</h3><p>On-campus job opportunities and work-study positions.</p></div>
+            <span class="resource-arrow">→</span>
+          </a>
+          <a href="https://stjohns.joinhandshake.com/" target="_blank" rel="noopener" class="resource-card">
+            <div class="resource-icon">🎯</div>
+            <div class="resource-info"><h3>Career Services</h3><p>Resume help, mock interviews, internship prep, and career fairs.</p></div>
+            <span class="resource-arrow">→</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- STUDENT LIFE -->
+      <div>
+        <p style="font-size:11px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--red);margin-bottom:12px;">🎓 Student Life</p>
+        <div class="resource-grid">
+          <a href="https://image.engage.stjohns.edu/lib/fe2a1173716405787c1076/m/1/6f69e5c4-e96e-436d-ad71-0ec10f90b94c.pdf" target="_blank" rel="noopener" class="resource-card">
+            <div class="resource-icon">📋</div>
+            <div class="resource-info"><h3>Student Ambassador — Position Description</h3><p>Learn about the Student Ambassador role and what it involves.</p></div>
+            <span class="resource-arrow">→</span>
+          </a>
+          <a href="https://apply.stjohns.edu/register/studentambassadorapp" target="_blank" rel="noopener" class="resource-card">
+            <div class="resource-icon">✍️</div>
+            <div class="resource-info"><h3>Student Ambassador — Application</h3><p>Apply to become a Student Ambassador at St. John's.</p></div>
+            <span class="resource-arrow">→</span>
+          </a>
+          <a href="https://apply.stjohns.edu/register/?id=953d4905-dc62-4ff8-835c-4b482924b1e4" target="_blank" rel="noopener" class="resource-card">
+            <div class="resource-icon">📅</div>
+            <div class="resource-info"><h3>Student Ambassador — Info Session</h3><p>Attend an info session to learn more about the program.</p></div>
+            <span class="resource-arrow">→</span>
+          </a>
+          <a href="https://forms.office.com/pages/responsepage.aspx?id=P4nfNtQNJ0GXpbxTe83GKmek5a3BI3ZCrccvJHI3Ez1UN0ZYTjdSR0JMTktFWUVLRzlaM0NKTzVDVy4u&route=shorturl" target="_blank" rel="noopener" class="resource-card">
+            <div class="resource-icon">⛪</div>
+            <div class="resource-info"><h3>Campus Ministry Retreats – Spring 2026</h3><p>Sign up for upcoming Campus Ministry retreat opportunities.</p></div>
+            <span class="resource-arrow">→</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- TRANSPORTATION & DINING -->
+      <div>
+        <p style="font-size:11px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--red);margin-bottom:12px;">🚌 Transportation & Dining</p>
+        <div class="resource-grid">
+          <a href="https://www.stjohns.edu/life-st-johns/new-york-locations/transportation-options" target="_blank" rel="noopener" class="resource-card">
+            <div class="resource-icon">🚌</div>
+            <div class="resource-info"><h3>Public Safety Shuttle Van</h3><p>Free shuttle service available for SJU students on campus.</p></div>
+            <span class="resource-arrow">→</span>
+          </a>
+          <a href="https://emma-assets.s3.amazonaws.com/0kegb/35870c9192eb33179d37700b77142e44/Updated_SJU_X_GrubHub_Instagram_Posts__3_.pdf" target="_blank" rel="noopener" class="resource-card">
+            <div class="resource-icon">🍔</div>
+            <div class="resource-info"><h3>GrubHub+ Information</h3><p>Learn how to use your GrubHub+ benefit as an SJU student.</p></div>
+            <span class="resource-arrow">→</span>
+          </a>
+          <a href="https://www.stjohns.edu/admission/tuition-and-financial-aid" target="_blank" rel="noopener" class="resource-card">
+            <div class="resource-icon">🎓</div>
+            <div class="resource-info"><h3>Financial Aid Office</h3><p>Questions about your aid package, grants, or work-study placement.</p><p style="font-size:12px;margin-top:4px;">📍 Queens Campus – Tobin College Building (Entrance across from Carnesecca Arena)</p></div>
+            <span class="resource-arrow">→</span>
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <section id="opportunities">
+    <div class="section-header">
+      <div>
+        <p class="section-label">Fellowships & Programs</p>
+        <h2 class="section-title">Off-Campus &amp; Online <em>Resources</em></h2>
+        <p class="section-desc">Competitive programs offering mentorship, internships, leadership training, and professional development for students like you.</p>
+      </div>
+    </div>
+    <hr class="section-divider">
+
+    <div class="opp-grid" style="margin-top:24px;">
+
+      <div class="opp-card">
+        <div class="opp-card-top">
+          <div class="opp-initials" style="background:#1A6B45;">A</div>
+          <div class="opp-badges">
+            <span class="badge badge-green">Fellowship</span>
+            <span class="badge badge-red">First-Gen</span>
+          </div>
+        </div>
+        <h3>America Needs You (ANY)</h3>
+        <p>A 2-year fellowship for first-gen, low-income students combining mentorship, career workshops, and professional development with guided internship and job placement support.</p>
+        <a href="https://americaneedsyou.org/" class="btn-outline" target="_blank" rel="noopener">Learn More →</a>
+      </div>
+
+      <div class="opp-card">
+        <div class="opp-card-top">
+          <div class="opp-initials" style="background:#C8420A;">A</div>
+          <div class="opp-badges">
+            <span class="badge badge-gold">First-Gen</span>
+            <span class="badge badge-green">Online</span>
+          </div>
+        </div>
+        <h3>America Needs You – FirstGenU</h3>
+        <p>A flexible, self-paced version of ANY offering online career modules, networking opportunities, and professional development tools for students.</p>
+        <a href="https://americaneedsyou.org/firstgenu/" class="btn-outline" target="_blank" rel="noopener">Learn More →</a>
+      </div>
+
+      <div class="opp-card">
+        <div class="opp-card-top">
+          <div class="opp-initials" style="background:#CC0033;">B</div>
+          <div class="opp-badges">
+            <span class="badge badge-red">Fellowship</span>
+            <span class="badge badge-gold">Career</span>
+          </div>
+        </div>
+        <h3>Basta Fellowship</h3>
+        <p>A structured program helping first-gen students secure strong full-time jobs through an intensive training period, 1:1 coaching, interview prep, and direct employer connections.</p>
+        <a href="https://www.projectbasta.com/fellowship" class="btn-outline" target="_blank" rel="noopener">Learn More →</a>
+      </div>
+
+      <div class="opp-card">
+        <div class="opp-card-top">
+          <div class="opp-initials" style="background:#2C6E8A;">S</div>
+          <div class="opp-badges">
+            <span class="badge badge-blue">Mentorship</span>
+            <span class="badge badge-green">Career</span>
+          </div>
+        </div>
+        <h3>StreetWise Partners</h3>
+        <p>A career mentorship program building professional skills, confidence, and networks. Work closely with mentors to improve resumes, interviewing, and long-term career strategy.</p>
+        <a href="https://www.streetwisepartners.org/" class="btn-outline" target="_blank" rel="noopener">Learn More →</a>
+      </div>
+
+      <div class="opp-card">
+        <div class="opp-card-top">
+          <div class="opp-initials" style="background:#1A3A8F;">L</div>
+          <div class="opp-badges">
+            <span class="badge badge-blue">Health</span>
+            <span class="badge badge-green">Internship</span>
+          </div>
+        </div>
+        <h3>LifeSci NYC</h3>
+        <p>A NYC initiative offering paid internships and training in life sciences fields like biotech and healthcare. Includes technical skill-building and industry career exposure.</p>
+        <a href="https://lifesci.nyc/" class="btn-outline" target="_blank" rel="noopener">Learn More →</a>
+      </div>
+
+      <div class="opp-card">
+        <div class="opp-card-top">
+          <div class="opp-initials" style="background:#5A3A8A;">E</div>
+          <div class="opp-badges">
+            <span class="badge badge-blue">Externship</span>
+            <span class="badge badge-green">Virtual</span>
+          </div>
+        </div>
+        <h3>Externs Weekly (Paragon One)</h3>
+        <p>Virtual externship programs where students complete short-term, real-world projects for companies — great for building your resume quickly with hands-on experience.</p>
+        <a href="https://join.paragonone.com/82a5b936/" class="btn-outline" target="_blank" rel="noopener">Learn More →</a>
+      </div>
+
+      <div class="opp-card">
+        <div class="opp-card-top">
+          <div class="opp-initials" style="background:#8A1A5A;">G</div>
+          <div class="opp-badges">
+            <span class="badge badge-red">Women</span>
+            <span class="badge badge-gold">Finance</span>
+          </div>
+        </div>
+        <h3>Girls Who Invest</h3>
+        <p>A highly selective program increasing women in finance, offering intensive investment training and paid internships at top firms, plus a strong alumni network.</p>
+        <a href="https://www.girlswhoinvest.org/" class="btn-outline" target="_blank" rel="noopener">Learn More →</a>
+      </div>
+
+      <div class="opp-card">
+        <div class="opp-card-top">
+          <div class="opp-initials" style="background:#1A5A3A;">G</div>
+          <div class="opp-badges">
+            <span class="badge badge-green">Women</span>
+            <span class="badge badge-blue">Tech</span>
+          </div>
+        </div>
+        <h3>Girls Who Code</h3>
+        <p>A nonprofit offering programs teaching coding, computer science fundamentals, and career readiness — helping students break into tech through education and community.</p>
+        <a href="https://girlswhocode.com/" class="btn-outline" target="_blank" rel="noopener">Learn More →</a>
+      </div>
+
+      <div class="opp-card">
+        <div class="opp-card-top">
+          <div class="opp-initials" style="background:#6B3A1A;">H</div>
+          <div class="opp-badges">
+            <span class="badge badge-gold">Fellowship</span>
+            <span class="badge badge-blue">Business</span>
+          </div>
+        </div>
+        <h3>Headstart Fellowship</h3>
+        <p>A career accelerator focused on business, startups, and finance, providing mentorship, networking opportunities, and exposure to professionals in competitive industries.</p>
+        <a href="https://www.headstartfellowship.com/fellowship" class="btn-outline" target="_blank" rel="noopener">Learn More →</a>
+      </div>
+
+      <div class="opp-card">
+        <div class="opp-card-top">
+          <div class="opp-initials" style="background:#1A4A6B;">L</div>
+          <div class="opp-badges">
+            <span class="badge badge-blue">NYC</span>
+            <span class="badge badge-green">Internship</span>
+          </div>
+        </div>
+        <h3>Ladders for Leaders (NYC)</h3>
+        <p>A selective NYC program that prepares students through training, then places them into paid professional internships with companies, nonprofits, and government agencies.</p>
+        <a href="https://www.commonpoint.org/program/ladders-for-leaders" class="btn-outline" target="_blank" rel="noopener">Learn More →</a>
+      </div>
+
+      <div class="opp-card">
+        <div class="opp-card-top">
+          <div class="opp-initials" style="background:#2C7A3A;">S</div>
+          <div class="opp-badges">
+            <span class="badge badge-green">NYC</span>
+            <span class="badge badge-gold">Paid</span>
+          </div>
+        </div>
+        <h3>SYEP – NYC Summer Youth Employment</h3>
+        <p>A large NYC program providing paid summer jobs to students, focusing on early work experience, career exposure, and professional skills development.</p>
+        <a href="https://application.nycsyep.com/" class="btn-outline" target="_blank" rel="noopener">Learn More →</a>
+      </div>
+
+      <div class="opp-card">
+        <div class="opp-card-top">
+          <div class="opp-initials" style="background:#4A1A6B;">A</div>
+          <div class="opp-badges">
+            <span class="badge badge-red">Leadership</span>
+            <span class="badge badge-gold">Global</span>
+          </div>
+        </div>
+        <h3>Aspire Leaders Program</h3>
+        <p>A free global leadership program offering career development training, leadership courses including Harvard-led content, and networking with peers worldwide.</p>
+        <a href="https://www.aspireleaders.org/" class="btn-outline" target="_blank" rel="noopener">Learn More →</a>
+      </div>
+
+      <div class="opp-card">
+        <div class="opp-card-top">
+          <div class="opp-initials" style="background:#1A3A6B;">M</div>
+          <div class="opp-badges">
+            <span class="badge badge-blue">Free</span>
+            <span class="badge badge-green">Online</span>
+          </div>
+        </div>
+        <h3>McKinsey Forward Program</h3>
+        <p>A free 10-week online program building core workplace skills like problem-solving, communication, adaptability, and digital literacy, with a certificate and global alumni network.</p>
+        <a href="https://www.mckinsey.org/our-programs/forward/overview" class="btn-outline" target="_blank" rel="noopener">Learn More →</a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- OPPORTUNITIES -->
+  <section id="opportunities-admin">
+    <div class="section-header">
+      <div>
+        <p class="section-label">Programs & Internships</p>
+        <h2 class="section-title"><em>Opportunities</em></h2>
+        <p class="section-desc">Fellowships, internships, leadership programs, and more — curated for SSS students.</p>
+      </div>
+    </div>
+    <hr class="section-divider">
+    <div class="program-grid" style="margin-top:24px;" id="opportunities-grid">
+      <p style="color:var(--text-light);font-size:14px;" id="opportunities-empty">No opportunities posted yet — check back soon!</p>
+    </div>
+  </section>
+
+  <!-- CAREER SERVICES TOOLS -->
+  <section id="career-services">
+    <div class="section-header">
+      <div>
+        <p class="section-label">Professional Development</p>
+        <h2 class="section-title">Career Services <em>Tools</em></h2>
+        <p class="section-desc">Two steps to launch your career — start by exploring your path, then use these tools to make it happen.</p>
+      </div>
+    </div>
+    <hr class="section-divider">
+
+    <!-- Step 1 -->
+    <div style="margin-bottom:32px;">
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px;">
+        <div style="background:var(--red);color:white;font-weight:700;font-size:14px;padding:6px 14px;border-radius:20px;">Step 1</div>
+        <h3 style="font-family:'DM Serif Display',serif;font-size:20px;font-weight:400;margin:0;">Choose Your Career Path</h3>
+      </div>
+      <p style="font-size:14px;color:var(--text-light);line-height:1.7;margin-bottom:14px;">Career Communities at St. John's group together related industries and careers to help you explore paths based on your interests, not just your major. By joining, you get personalized resources, events, and opportunities that support your career goals and help you make connections.</p>
+      <a href="https://careerservices.stjohns.edu/channels/what-are-communities/" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:6px;padding:9px 18px;background:var(--red);color:white;border-radius:9px;text-decoration:none;font-size:13px;font-weight:600;">Explore Career Communities →</a>
+    </div>
+
+    <!-- Step 2 -->
+    <div>
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px;">
+        <div style="background:var(--red);color:white;font-weight:700;font-size:14px;padding:6px 14px;border-radius:20px;">Step 2</div>
+        <h3 style="font-family:'DM Serif Display',serif;font-size:20px;font-weight:400;margin:0;">Use Online Resources</h3>
+      </div>
+      <div class="program-grid" style="margin-top:8px;">
+
+        <a href="https://stjohns.joinhandshake.com/login" target="_blank" rel="noopener" class="resource-card">
+          <div class="resource-icon">🤝</div>
+          <div class="resource-info"><h3>Handshake</h3><p>St. John's recruiting platform for internships, jobs, and events.</p></div>
+          <span class="resource-arrow">→</span>
+        </a>
+
+        <a href="https://info.parkerdewey.com/student/stjohns" target="_blank" rel="noopener" class="resource-card">
+          <div class="resource-icon">💼</div>
+          <div class="resource-info"><h3>Parker Dewey</h3><p>Paid micro-internship opportunities.</p></div>
+          <span class="resource-arrow">→</span>
+        </a>
+
+        <a href="https://www.theforage.com/landing/st-johns-university-7t43j/st-johns-university-k40f" target="_blank" rel="noopener" class="resource-card">
+          <div class="resource-icon">🌱</div>
+          <div class="resource-info"><h3>Forage</h3><p>Virtual work experience programs with top companies.</p></div>
+          <span class="resource-arrow">→</span>
+        </a>
+
+        <a href="https://student.interstride.com/login" target="_blank" rel="noopener" class="resource-card">
+          <div class="resource-icon">🌍</div>
+          <div class="resource-info"><h3>Interstride</h3><p>Job search support for international students.</p></div>
+          <span class="resource-arrow">→</span>
+        </a>
+
+        <a href="https://whatcanidowiththismajor.com/" target="_blank" rel="noopener" class="resource-card">
+          <div class="resource-icon">🎓</div>
+          <div class="resource-info"><h3>What Can I Do With This Major?</h3><p>Explore career paths by major.</p></div>
+          <span class="resource-arrow">→</span>
+        </a>
+
+        <a href="https://www.onetonline.org/" target="_blank" rel="noopener" class="resource-card">
+          <div class="resource-icon">🔍</div>
+          <div class="resource-info"><h3>O*Net Online</h3><p>Learn about job requirements, skills, and careers.</p></div>
+          <span class="resource-arrow">→</span>
+        </a>
+
+        <a href="https://www.bls.gov/ooh/" target="_blank" rel="noopener" class="resource-card">
+          <div class="resource-icon">📊</div>
+          <div class="resource-info"><h3>Occupational Outlook Handbook</h3><p>Salary, job outlook, and industry trends.</p></div>
+          <span class="resource-arrow">→</span>
+        </a>
+
+        <a href="https://careerservices.stjohns.edu/videos/?ctag%5B%5D=candid-career-videos" target="_blank" rel="noopener" class="resource-card">
+          <div class="resource-icon">🎬</div>
+          <div class="resource-info"><h3>Candid Career</h3><p>Career videos from industry professionals.</p></div>
+          <span class="resource-arrow">→</span>
+        </a>
+
+        <a href="https://careerservices.stjohns.edu/resources/big-interview/" target="_blank" rel="noopener" class="resource-card">
+          <div class="resource-icon">🎤</div>
+          <div class="resource-info"><h3>Big Interview</h3><p>Practice interviews with video feedback.</p></div>
+          <span class="resource-arrow">→</span>
+        </a>
+
+        <a href="https://www.linkedin.com/company/stjohnscareerservices/" target="_blank" rel="noopener" class="resource-card">
+          <div class="resource-icon">🔗</div>
+          <div class="resource-info"><h3>LinkedIn – Career Services</h3><p>Connect and build your network.</p></div>
+          <span class="resource-arrow">→</span>
+        </a>
+
+        <a href="https://careerservices.stjohns.edu/account/login/?redirect_to=%2Fresources%2Ffocus2%2F&restricted=true" target="_blank" rel="noopener" class="resource-card">
+          <div class="resource-icon">🧭</div>
+          <div class="resource-info"><h3>Focus2</h3><p>Career assessment tool (login required).</p></div>
+          <span class="resource-arrow">→</span>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
   <section id="scholarships">
     <div class="section-header">
       <div>
@@ -1481,193 +2064,68 @@
 
     </div>
   </section>
-
-  <!-- OPPORTUNITIES -->
-  <section id="opportunities">
+  <section id="spotlights">
     <div class="section-header">
       <div>
-        <p class="section-label">Fellowships & Programs</p>
-        <h2 class="section-title">Off-Campus &amp; Online <em>Resources</em></h2>
-        <p class="section-desc">Competitive programs offering mentorship, internships, leadership training, and professional development for students like you.</p>
+        <p class="section-label">Inspiring Stories</p>
+        <h2 class="section-title">Student <em>Spotlights</em></h2>
+        <p class="section-desc">Real SSS students, real achievements. Let their journeys inspire yours.</p>
       </div>
     </div>
     <hr class="section-divider">
 
-    <div class="opp-grid" style="margin-top:24px;">
+    <div class="spotlight-grid" style="margin-top:24px;">
 
-      <div class="opp-card">
-        <div class="opp-card-top">
-          <div class="opp-initials" style="background:#1A6B45;">A</div>
-          <div class="opp-badges">
-            <span class="badge badge-green">Fellowship</span>
-            <span class="badge badge-red">First-Gen</span>
+      <div class="spotlight-card">
+        <div class="spotlight-banner r1">
+          <div class="spotlight-avatar">M</div>
+        </div>
+        <div class="spotlight-body">
+          <h3>Maria R.</h3>
+          <p class="spotlight-role">Landed a Finance Internship at a Top NYC Firm</p>
+          <p class="spotlight-quote">"SSS taught me how to turn my work-study job into a resume win. I didn't think I was 'qualified' — until I was."</p>
+          <div class="spotlight-tags">
+            <span class="stag">Finance</span>
+            <span class="stag">First-Gen</span>
+            <span class="stag">SEO Career</span>
           </div>
         </div>
-        <h3>America Needs You (ANY)</h3>
-        <p>A 2-year fellowship for first-gen, low-income students combining mentorship, career workshops, and professional development with guided internship and job placement support.</p>
-        <a href="https://americaneedsyou.org/" class="btn-outline" target="_blank" rel="noopener">Learn More →</a>
       </div>
 
-      <div class="opp-card">
-        <div class="opp-card-top">
-          <div class="opp-initials" style="background:#C8420A;">A</div>
-          <div class="opp-badges">
-            <span class="badge badge-gold">First-Gen</span>
-            <span class="badge badge-green">Online</span>
+      <div class="spotlight-card">
+        <div class="spotlight-banner r2">
+          <div class="spotlight-avatar">J</div>
+        </div>
+        <div class="spotlight-body">
+          <h3>James T.</h3>
+          <p class="spotlight-role">McNair Scholar · Pursuing a PhD in Biology</p>
+          <p class="spotlight-quote">"I didn't know grad school was even possible for someone like me. The SSS advisors helped me believe it was — and then make it happen."</p>
+          <div class="spotlight-tags">
+            <span class="stag">Research</span>
+            <span class="stag">STEM</span>
+            <span class="stag">McNair</span>
           </div>
         </div>
-        <h3>America Needs You – FirstGenU</h3>
-        <p>A flexible, self-paced version of ANY offering online career modules, networking opportunities, and professional development tools for students.</p>
-        <a href="https://americaneedsyou.org/firstgenu/" class="btn-outline" target="_blank" rel="noopener">Learn More →</a>
       </div>
 
-      <div class="opp-card">
-        <div class="opp-card-top">
-          <div class="opp-initials" style="background:#CC0033;">B</div>
-          <div class="opp-badges">
-            <span class="badge badge-red">Fellowship</span>
-            <span class="badge badge-gold">Career</span>
+      <div class="spotlight-card">
+        <div class="spotlight-banner r3">
+          <div class="spotlight-avatar">A</div>
+        </div>
+        <div class="spotlight-body">
+          <h3>Aaliyah K.</h3>
+          <p class="spotlight-role">Student Leader · Balancing 3 Roles &amp; Dean's List</p>
+          <p class="spotlight-quote">"Working, leading a club, and keeping my GPA up felt impossible. The balance guide from SSS changed how I think about my time."</p>
+          <div class="spotlight-tags">
+            <span class="stag">Leadership</span>
+            <span class="stag">Dean's List</span>
+            <span class="stag">Work-Study</span>
           </div>
         </div>
-        <h3>Basta Fellowship</h3>
-        <p>A structured program helping first-gen students secure strong full-time jobs through an intensive training period, 1:1 coaching, interview prep, and direct employer connections.</p>
-        <a href="https://www.projectbasta.com/fellowship" class="btn-outline" target="_blank" rel="noopener">Learn More →</a>
-      </div>
-
-      <div class="opp-card">
-        <div class="opp-card-top">
-          <div class="opp-initials" style="background:#2C6E8A;">S</div>
-          <div class="opp-badges">
-            <span class="badge badge-blue">Mentorship</span>
-            <span class="badge badge-green">Career</span>
-          </div>
-        </div>
-        <h3>StreetWise Partners</h3>
-        <p>A career mentorship program building professional skills, confidence, and networks. Work closely with mentors to improve resumes, interviewing, and long-term career strategy.</p>
-        <a href="https://www.streetwisepartners.org/" class="btn-outline" target="_blank" rel="noopener">Learn More →</a>
-      </div>
-
-      <div class="opp-card">
-        <div class="opp-card-top">
-          <div class="opp-initials" style="background:#1A3A8F;">L</div>
-          <div class="opp-badges">
-            <span class="badge badge-blue">Health</span>
-            <span class="badge badge-green">Internship</span>
-          </div>
-        </div>
-        <h3>LifeSci NYC</h3>
-        <p>A NYC initiative offering paid internships and training in life sciences fields like biotech and healthcare. Includes technical skill-building and industry career exposure.</p>
-        <a href="https://lifesci.nyc/" class="btn-outline" target="_blank" rel="noopener">Learn More →</a>
-      </div>
-
-      <div class="opp-card">
-        <div class="opp-card-top">
-          <div class="opp-initials" style="background:#5A3A8A;">E</div>
-          <div class="opp-badges">
-            <span class="badge badge-blue">Externship</span>
-            <span class="badge badge-green">Virtual</span>
-          </div>
-        </div>
-        <h3>Externs Weekly (Paragon One)</h3>
-        <p>Virtual externship programs where students complete short-term, real-world projects for companies — great for building your resume quickly with hands-on experience.</p>
-        <a href="https://join.paragonone.com/82a5b936/" class="btn-outline" target="_blank" rel="noopener">Learn More →</a>
-      </div>
-
-      <div class="opp-card">
-        <div class="opp-card-top">
-          <div class="opp-initials" style="background:#8A1A5A;">G</div>
-          <div class="opp-badges">
-            <span class="badge badge-red">Women</span>
-            <span class="badge badge-gold">Finance</span>
-          </div>
-        </div>
-        <h3>Girls Who Invest</h3>
-        <p>A highly selective program increasing women in finance, offering intensive investment training and paid internships at top firms, plus a strong alumni network.</p>
-        <a href="https://www.girlswhoinvest.org/" class="btn-outline" target="_blank" rel="noopener">Learn More →</a>
-      </div>
-
-      <div class="opp-card">
-        <div class="opp-card-top">
-          <div class="opp-initials" style="background:#1A5A3A;">G</div>
-          <div class="opp-badges">
-            <span class="badge badge-green">Women</span>
-            <span class="badge badge-blue">Tech</span>
-          </div>
-        </div>
-        <h3>Girls Who Code</h3>
-        <p>A nonprofit offering programs teaching coding, computer science fundamentals, and career readiness — helping students break into tech through education and community.</p>
-        <a href="https://girlswhocode.com/" class="btn-outline" target="_blank" rel="noopener">Learn More →</a>
-      </div>
-
-      <div class="opp-card">
-        <div class="opp-card-top">
-          <div class="opp-initials" style="background:#6B3A1A;">H</div>
-          <div class="opp-badges">
-            <span class="badge badge-gold">Fellowship</span>
-            <span class="badge badge-blue">Business</span>
-          </div>
-        </div>
-        <h3>Headstart Fellowship</h3>
-        <p>A career accelerator focused on business, startups, and finance, providing mentorship, networking opportunities, and exposure to professionals in competitive industries.</p>
-        <a href="https://www.headstartfellowship.com/fellowship" class="btn-outline" target="_blank" rel="noopener">Learn More →</a>
-      </div>
-
-      <div class="opp-card">
-        <div class="opp-card-top">
-          <div class="opp-initials" style="background:#1A4A6B;">L</div>
-          <div class="opp-badges">
-            <span class="badge badge-blue">NYC</span>
-            <span class="badge badge-green">Internship</span>
-          </div>
-        </div>
-        <h3>Ladders for Leaders (NYC)</h3>
-        <p>A selective NYC program that prepares students through training, then places them into paid professional internships with companies, nonprofits, and government agencies.</p>
-        <a href="https://www.commonpoint.org/program/ladders-for-leaders" class="btn-outline" target="_blank" rel="noopener">Learn More →</a>
-      </div>
-
-      <div class="opp-card">
-        <div class="opp-card-top">
-          <div class="opp-initials" style="background:#2C7A3A;">S</div>
-          <div class="opp-badges">
-            <span class="badge badge-green">NYC</span>
-            <span class="badge badge-gold">Paid</span>
-          </div>
-        </div>
-        <h3>SYEP – NYC Summer Youth Employment</h3>
-        <p>A large NYC program providing paid summer jobs to students, focusing on early work experience, career exposure, and professional skills development.</p>
-        <a href="https://application.nycsyep.com/" class="btn-outline" target="_blank" rel="noopener">Learn More →</a>
-      </div>
-
-      <div class="opp-card">
-        <div class="opp-card-top">
-          <div class="opp-initials" style="background:#4A1A6B;">A</div>
-          <div class="opp-badges">
-            <span class="badge badge-red">Leadership</span>
-            <span class="badge badge-gold">Global</span>
-          </div>
-        </div>
-        <h3>Aspire Leaders Program</h3>
-        <p>A free global leadership program offering career development training, leadership courses including Harvard-led content, and networking with peers worldwide.</p>
-        <a href="https://www.aspireleaders.org/" class="btn-outline" target="_blank" rel="noopener">Learn More →</a>
-      </div>
-
-      <div class="opp-card">
-        <div class="opp-card-top">
-          <div class="opp-initials" style="background:#1A3A6B;">M</div>
-          <div class="opp-badges">
-            <span class="badge badge-blue">Free</span>
-            <span class="badge badge-green">Online</span>
-          </div>
-        </div>
-        <h3>McKinsey Forward Program</h3>
-        <p>A free 10-week online program building core workplace skills like problem-solving, communication, adaptability, and digital literacy, with a certificate and global alumni network.</p>
-        <a href="https://www.mckinsey.org/our-programs/forward/overview" class="btn-outline" target="_blank" rel="noopener">Learn More →</a>
       </div>
 
     </div>
   </section>
-
-  <!-- NEWSLETTERS -->
   <section id="newsletters">
     <div class="section-header">
       <div>
@@ -1764,280 +2222,6 @@
 
     </div>
   </section>
-
-  <!-- STUDENT SPOTLIGHTS -->
-  <section id="spotlights">
-    <div class="section-header">
-      <div>
-        <p class="section-label">Inspiring Stories</p>
-        <h2 class="section-title">Student <em>Spotlights</em></h2>
-        <p class="section-desc">Real SSS students, real achievements. Let their journeys inspire yours.</p>
-      </div>
-    </div>
-    <hr class="section-divider">
-
-    <div class="spotlight-grid" style="margin-top:24px;">
-
-      <div class="spotlight-card">
-        <div class="spotlight-banner r1">
-          <div class="spotlight-avatar">M</div>
-        </div>
-        <div class="spotlight-body">
-          <h3>Maria R.</h3>
-          <p class="spotlight-role">Landed a Finance Internship at a Top NYC Firm</p>
-          <p class="spotlight-quote">"SSS taught me how to turn my work-study job into a resume win. I didn't think I was 'qualified' — until I was."</p>
-          <div class="spotlight-tags">
-            <span class="stag">Finance</span>
-            <span class="stag">First-Gen</span>
-            <span class="stag">SEO Career</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="spotlight-card">
-        <div class="spotlight-banner r2">
-          <div class="spotlight-avatar">J</div>
-        </div>
-        <div class="spotlight-body">
-          <h3>James T.</h3>
-          <p class="spotlight-role">McNair Scholar · Pursuing a PhD in Biology</p>
-          <p class="spotlight-quote">"I didn't know grad school was even possible for someone like me. The SSS advisors helped me believe it was — and then make it happen."</p>
-          <div class="spotlight-tags">
-            <span class="stag">Research</span>
-            <span class="stag">STEM</span>
-            <span class="stag">McNair</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="spotlight-card">
-        <div class="spotlight-banner r3">
-          <div class="spotlight-avatar">A</div>
-        </div>
-        <div class="spotlight-body">
-          <h3>Aaliyah K.</h3>
-          <p class="spotlight-role">Student Leader · Balancing 3 Roles &amp; Dean's List</p>
-          <p class="spotlight-quote">"Working, leading a club, and keeping my GPA up felt impossible. The balance guide from SSS changed how I think about my time."</p>
-          <div class="spotlight-tags">
-            <span class="stag">Leadership</span>
-            <span class="stag">Dean's List</span>
-            <span class="stag">Work-Study</span>
-          </div>
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- CAMPUS RESOURCES -->
-  <section id="resources">
-    <div class="section-header">
-      <div>
-        <p class="section-label">St. John's University</p>
-        <h2 class="section-title">Campus <em>Resources</em></h2>
-        <p class="section-desc">Everything you need at St. John's — academic support, wellness, jobs, and more all in one place.</p>
-      </div>
-    </div>
-    <hr class="section-divider">
-
-    <div style="display:grid;gap:28px;margin-top:24px;">
-
-      <!-- ALL IN ONE -->
-      <div>
-        <p style="font-size:11px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--red);margin-bottom:12px;">🔗 All-in-One</p>
-        <div class="resource-grid">
-          <a href="https://linktr.ee/StJohnsNow?utm_source=linktree_profile_share&ltsid=5c62e73f-2692-42bf-944e-1c768b677058" target="_blank" rel="noopener" class="resource-card">
-            <div class="resource-icon">🌐</div>
-            <div class="resource-info"><h3>St. John's Linktree</h3><p>All St. John's links in one place — the ultimate quick-access hub.</p></div>
-            <span class="resource-arrow">→</span>
-          </a>
-          <a href="https://signon.stjohns.edu/" target="_blank" rel="noopener" class="resource-card">
-            <div class="resource-icon">🔐</div>
-            <div class="resource-info"><h3>St. John's Sign On</h3><p>Access your email, Canvas, and all SJU platforms in one login.</p></div>
-            <span class="resource-arrow">→</span>
-          </a>
-          <a href="https://experience.elluciancloud.com/sjusaasproduction" target="_blank" rel="noopener" class="resource-card">
-            <div class="resource-icon">💻</div>
-            <div class="resource-info"><h3>New UIS Experience</h3><p>The new student information system for registration, records, and more.</p></div>
-            <span class="resource-arrow">→</span>
-          </a>
-          <a href="https://www.stjohns.edu/who-we-are/faith-mission-ministry/help-basic-needs" target="_blank" rel="noopener" class="resource-card">
-            <div class="resource-icon">🤝</div>
-            <div class="resource-info"><h3>Basic Needs Resources</h3><p>Food, housing, financial, and emergency support resources at SJU.</p></div>
-            <span class="resource-arrow">→</span>
-          </a>
-        </div>
-      </div>
-
-      <!-- ACADEMIC SUPPORT -->
-      <div>
-        <p style="font-size:11px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--red);margin-bottom:12px;">📐 Academic Support</p>
-        <div class="resource-grid">
-          <a href="https://ulc.mywconline.com/" target="_blank" rel="noopener" class="resource-card">
-            <div class="resource-icon">📐</div>
-            <div class="resource-info"><h3>University Learning Commons</h3><p>Free tutoring appointments for all subjects.</p></div>
-            <span class="resource-arrow">→</span>
-          </a>
-          <a href="https://stj.mywconline.com/" target="_blank" rel="noopener" class="resource-card">
-            <div class="resource-icon">✍️</div>
-            <div class="resource-info"><h3>Writing Center</h3><p>Get help with essays, research papers, and personal statements.</p></div>
-            <span class="resource-arrow">→</span>
-          </a>
-          <a href="https://www.stjohns.edu/academics/office-registrar/academic-calendar" target="_blank" rel="noopener" class="resource-card">
-            <div class="resource-icon">📅</div>
-            <div class="resource-info"><h3>Academic Calendar</h3><p>Key dates — registration, finals, breaks, and deadlines.</p></div>
-            <span class="resource-arrow">→</span>
-          </a>
-        </div>
-      </div>
-
-      <!-- MENTORING PROGRAMS -->
-      <div>
-        <p style="font-size:11px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--red);margin-bottom:12px;">🌱 Mentoring & Support Programs</p>
-        <div class="resource-grid">
-          <a href="#" class="resource-card">
-            <div class="resource-icon">🌱</div>
-            <div class="resource-info"><h3>RISE Mentoring</h3><p>Peer mentoring connecting students with upperclassmen and professionals.</p></div>
-            <span class="resource-arrow">→</span>
-          </a>
-          <a href="#" class="resource-card">
-            <div class="resource-icon">🔬</div>
-            <div class="resource-info"><h3>CSTEP</h3><p>Collegiate Science and Technology Entry Program for STEM students.</p></div>
-            <span class="resource-arrow">→</span>
-          </a>
-          <a href="#" class="resource-card">
-            <div class="resource-icon">🎓</div>
-            <div class="resource-info"><h3>McNair Scholars</h3><p>Federal TRIO program preparing first-gen students for doctoral study.</p></div>
-            <span class="resource-arrow">→</span>
-          </a>
-          <a href="#" class="resource-card">
-            <div class="resource-icon">⚡</div>
-            <div class="resource-info"><h3>EPIC Mentoring</h3><p>Leadership and professional development mentoring program.</p></div>
-            <span class="resource-arrow">→</span>
-          </a>
-          <a href="#" class="resource-card">
-            <div class="resource-icon">🚀</div>
-            <div class="resource-info"><h3>Aspire Mentoring</h3><p>One-on-one mentoring focused on academic success and career readiness.</p></div>
-            <span class="resource-arrow">→</span>
-          </a>
-        </div>
-      </div>
-
-      <!-- WELLNESS -->
-      <div>
-        <p style="font-size:11px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--red);margin-bottom:12px;">🧠 Wellness Services</p>
-        <div class="resource-grid">
-          <a href="https://www.stjohns.edu/life-st-johns/health-and-wellness/student-health-services" target="_blank" rel="noopener" class="resource-card">
-            <div class="resource-icon">🏥</div>
-            <div class="resource-info"><h3>Free Health Services</h3><p>Free health services available to all enrolled SJU students.</p></div>
-            <span class="resource-arrow">→</span>
-          </a>
-          <a href="https://www.stjohns.edu/life-st-johns/health-and-wellness/center-counseling-and-consultation" target="_blank" rel="noopener" class="resource-card">
-            <div class="resource-icon">🧠</div>
-            <div class="resource-info"><h3>Free Counseling</h3><p>Free confidential counseling services for all enrolled students.</p></div>
-            <span class="resource-arrow">→</span>
-          </a>
-          <a href="https://www.stjohns.edu/life-st-johns/health-and-wellness/sexual-assault-you-are-not-alone" target="_blank" rel="noopener" class="resource-card">
-            <div class="resource-icon">💜</div>
-            <div class="resource-info"><h3>Sexual Assault Resources</h3><p>Support, resources, and guidance — you are not alone.</p></div>
-            <span class="resource-arrow">→</span>
-          </a>
-        </div>
-      </div>
-
-      <!-- JOBS & OPPORTUNITIES -->
-      <div>
-        <p style="font-size:11px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--red);margin-bottom:12px;">💼 Jobs & Opportunities</p>
-        <div class="resource-grid">
-          <a href="https://stjohns.joinhandshake.com/login" target="_blank" rel="noopener" class="resource-card">
-            <div class="resource-icon">💼</div>
-            <div class="resource-info"><h3>Handshake</h3><p>Find internships, jobs, and career events tailored to SJU students.</p></div>
-            <span class="resource-arrow">→</span>
-          </a>
-          <a href="https://www.stjohns.edu/about/leadership-and-administration/administrative-offices/human-resources/recruitment/student-employment" target="_blank" rel="noopener" class="resource-card">
-            <div class="resource-icon">🏫</div>
-            <div class="resource-info"><h3>Student Employment at SJU</h3><p>On-campus job opportunities and work-study positions.</p></div>
-            <span class="resource-arrow">→</span>
-          </a>
-          <a href="https://stjohns.joinhandshake.com/" target="_blank" rel="noopener" class="resource-card">
-            <div class="resource-icon">🎯</div>
-            <div class="resource-info"><h3>Career Services</h3><p>Resume help, mock interviews, internship prep, and career fairs.</p></div>
-            <span class="resource-arrow">→</span>
-          </a>
-        </div>
-      </div>
-
-      <!-- STUDENT LIFE -->
-      <div>
-        <p style="font-size:11px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--red);margin-bottom:12px;">🎓 Student Life</p>
-        <div class="resource-grid">
-          <a href="https://image.engage.stjohns.edu/lib/fe2a1173716405787c1076/m/1/6f69e5c4-e96e-436d-ad71-0ec10f90b94c.pdf" target="_blank" rel="noopener" class="resource-card">
-            <div class="resource-icon">📋</div>
-            <div class="resource-info"><h3>Student Ambassador — Position Description</h3><p>Learn about the Student Ambassador role and what it involves.</p></div>
-            <span class="resource-arrow">→</span>
-          </a>
-          <a href="https://apply.stjohns.edu/register/studentambassadorapp" target="_blank" rel="noopener" class="resource-card">
-            <div class="resource-icon">✍️</div>
-            <div class="resource-info"><h3>Student Ambassador — Application</h3><p>Apply to become a Student Ambassador at St. John's.</p></div>
-            <span class="resource-arrow">→</span>
-          </a>
-          <a href="https://apply.stjohns.edu/register/?id=953d4905-dc62-4ff8-835c-4b482924b1e4" target="_blank" rel="noopener" class="resource-card">
-            <div class="resource-icon">📅</div>
-            <div class="resource-info"><h3>Student Ambassador — Info Session</h3><p>Attend an info session to learn more about the program.</p></div>
-            <span class="resource-arrow">→</span>
-          </a>
-          <a href="https://forms.office.com/pages/responsepage.aspx?id=P4nfNtQNJ0GXpbxTe83GKmek5a3BI3ZCrccvJHI3Ez1UN0ZYTjdSR0JMTktFWUVLRzlaM0NKTzVDVy4u&route=shorturl" target="_blank" rel="noopener" class="resource-card">
-            <div class="resource-icon">⛪</div>
-            <div class="resource-info"><h3>Campus Ministry Retreats – Spring 2026</h3><p>Sign up for upcoming Campus Ministry retreat opportunities.</p></div>
-            <span class="resource-arrow">→</span>
-          </a>
-        </div>
-      </div>
-
-      <!-- TRANSPORTATION & DINING -->
-      <div>
-        <p style="font-size:11px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--red);margin-bottom:12px;">🚌 Transportation & Dining</p>
-        <div class="resource-grid">
-          <a href="https://www.stjohns.edu/life-st-johns/new-york-locations/transportation-options" target="_blank" rel="noopener" class="resource-card">
-            <div class="resource-icon">🚌</div>
-            <div class="resource-info"><h3>Public Safety Shuttle Van</h3><p>Free shuttle service available for SJU students on campus.</p></div>
-            <span class="resource-arrow">→</span>
-          </a>
-          <a href="https://emma-assets.s3.amazonaws.com/0kegb/35870c9192eb33179d37700b77142e44/Updated_SJU_X_GrubHub_Instagram_Posts__3_.pdf" target="_blank" rel="noopener" class="resource-card">
-            <div class="resource-icon">🍔</div>
-            <div class="resource-info"><h3>GrubHub+ Information</h3><p>Learn how to use your GrubHub+ benefit as an SJU student.</p></div>
-            <span class="resource-arrow">→</span>
-          </a>
-          <a href="#" class="resource-card">
-            <div class="resource-icon">🎓</div>
-            <div class="resource-info"><h3>Financial Aid Office</h3><p>Questions about your aid package, grants, or work-study placement.</p></div>
-            <span class="resource-arrow">→</span>
-          </a>
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- UPCOMING EVENTS -->
-  <section id="upcoming-events">
-    <div class="section-header">
-      <div>
-        <p class="section-label">This Semester</p>
-        <h2 class="section-title">Upcoming <em>Events</em></h2>
-        <p class="section-desc">Workshops, excursions, and programs happening soon. Attend at least 3 per semester!</p>
-      </div>
-    </div>
-    <hr class="section-divider">
-    <div class="program-grid" style="margin-top:24px;" id="upcoming-events-grid">
-      <div style="text-align:center;padding:40px;color:var(--text-light);font-size:14px);grid-column:1/-1;">
-        <div style="font-size:32px;margin-bottom:10px;">📅</div>
-        <p>Upcoming events will appear here. Check back soon!</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- PAST EVENTS -->
   <section id="past-events">
     <div class="section-header">
       <div>
@@ -2054,6 +2238,222 @@
       </div>
     </div>
   </section>
+
+  <!-- DEANS MODAL -->
+  <div id="deans-modal" class="modal-overlay" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.55);z-index:9999;overflow-y:auto;padding:24px 16px;" onclick="if(event.target===this)this.classList.remove('open')">
+    <div style="background:white;border-radius:20px;max-width:720px;margin:0 auto;padding:36px 32px;position:relative;">
+      <button onclick="document.getElementById('deans-modal').classList.remove('open')" style="position:absolute;top:16px;right:16px;background:none;border:none;font-size:22px;cursor:pointer;color:#666;">✕</button>
+      <h2 style="font-family:'DM Serif Display',serif;font-size:26px;font-weight:400;margin-bottom:6px;">Deans & Academic Offices</h2>
+      <p style="color:#888;font-size:13px;margin-bottom:28px;">Contact information for all St. John's colleges and advising offices.</p>
+
+      <!-- Liberal Arts -->
+      <div style="margin-bottom:28px;">
+        <div style="background:#CC0033;color:white;border-radius:10px;padding:12px 16px;margin-bottom:14px;">
+          <h3 style="font-size:15px;font-weight:600;margin:0;">📚 St. John's College of Liberal Arts & Sciences</h3>
+          <p style="font-size:12px;opacity:0.85;margin:2px 0 0;">Center for Student Success — First-Year Students</p>
+        </div>
+        <div style="display:grid;gap:8px;font-size:13px;color:#444;padding:0 4px;">
+          <p>🎯 <strong>Purpose:</strong> Academic, personal, and professional support — advising, tutoring, success programs</p>
+          <p>📍 St. Augustine Hall (University Library), Room 104</p>
+          <p>📞 718-990-5858 &nbsp;|&nbsp; ✉️ studentsuccess@stjohns.edu</p>
+          <p>🕐 Mon–Thurs: 8:30 AM – 4:30 PM &nbsp;|&nbsp; Fri: 8:30 AM – 3:00 PM</p>
+        </div>
+      </div>
+
+      <!-- Education -->
+      <div style="margin-bottom:28px;">
+        <div style="background:#1A3A8F;color:white;border-radius:10px;padding:12px 16px;margin-bottom:14px;">
+          <h3 style="font-size:15px;font-weight:600;margin:0;">🏫 School of Education – Dean's Office (Queens Campus)</h3>
+          <p style="font-size:12px;opacity:0.85;margin:2px 0 0;">📍 Main: St. John Hall, Room 135</p>
+        </div>
+        <div style="display:grid;gap:10px;font-size:13px;color:#444;padding:0 4px;">
+          <div style="background:#f9f9f9;border-radius:8px;padding:12px;">
+            <p style="font-weight:600;margin-bottom:6px;">Dean's Office</p>
+            <p>👤 Dean: James D. Wolfinger, Ph.D. &nbsp;|&nbsp; Contact: Rosemary Costabile</p>
+            <p>📍 Sullivan Hall, 5th Floor &nbsp;|&nbsp; 📞 718-990-5850 &nbsp;|&nbsp; ✉️ costabir@stjohns.edu</p>
+          </div>
+          <div style="background:#f9f9f9;border-radius:8px;padding:12px;">
+            <p style="font-weight:600;margin-bottom:6px;">Associate Dean</p>
+            <p>👤 Dr. Mirella Avalos-Louie &nbsp;|&nbsp; Contact: Tamein Haynes</p>
+            <p>📞 718-990-1695 &nbsp;|&nbsp; ✉️ haynest1@stjohns.edu</p>
+          </div>
+          <div style="background:#f9f9f9;border-radius:8px;padding:12px;">
+            <p style="font-weight:600;margin-bottom:6px;">Curriculum & Instruction</p>
+            <p>📌 Chair: Dr. Donald McClure</p>
+            <p><em>Undergraduate:</em> Bernadette Zacharuk &nbsp;|&nbsp; 📞 718-990-2664 &nbsp;|&nbsp; ✉️ zacharub@stjohns.edu &nbsp;|&nbsp; Sullivan Hall, Rm 133</p>
+            <p><em>Graduate:</em> Reshma Mohabir &nbsp;|&nbsp; 📞 718-990-5644 &nbsp;|&nbsp; ✉️ mohabirr@stjohns.edu</p>
+          </div>
+          <div style="background:#f9f9f9;border-radius:8px;padding:12px;">
+            <p style="font-weight:600;margin-bottom:6px;">Administration & Instructional Leadership</p>
+            <p>📌 Chair: Dr. Stephen Kotok &nbsp;|&nbsp; 📞 718-990-2654 &nbsp;|&nbsp; ✉️ kotoks@stjohns.edu</p>
+          </div>
+          <div style="background:#f9f9f9;border-radius:8px;padding:12px;">
+            <p style="font-weight:600;margin-bottom:6px;">Education Specialties</p>
+            <p>👤 Eileen Lewis &nbsp;|&nbsp; 📞 718-990-1563 &nbsp;|&nbsp; ✉️ lewise@stjohns.edu</p>
+          </div>
+          <div style="background:#f9f9f9;border-radius:8px;padding:12px;">
+            <p style="font-weight:600;margin-bottom:6px;">Counselor Education</p>
+            <p>👤 Cathy Berardi &nbsp;|&nbsp; 📞 718-990-6455 &nbsp;|&nbsp; ✉️ berardic@stjohns.edu</p>
+          </div>
+          <div style="background:#f9f9f9;border-radius:8px;padding:12px;">
+            <p style="font-weight:600;margin-bottom:6px;">Graduate Recruitment</p>
+            <p>👤 Stephanie Shaw, Ed.D. &nbsp;|&nbsp; 📞 718-990-6034 &nbsp;|&nbsp; ✉️ shaws@stjohns.edu</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tobin Business -->
+      <div style="margin-bottom:28px;">
+        <div style="background:#C8972A;color:white;border-radius:10px;padding:12px 16px;margin-bottom:14px;">
+          <h3 style="font-size:15px;font-weight:600;margin:0;">💼 Peter J. Tobin College of Business – Dean's Office</h3>
+          <p style="font-size:12px;opacity:0.85;margin:2px 0 0;">📍 Bent Hall, 1st Floor</p>
+        </div>
+        <div style="font-size:13px;color:#444;padding:0 4px;display:grid;gap:6px;">
+          <p>👤 Dean: Maciek Nowak, Ph.D.</p>
+          <p>📞 Main: 718-990-2000 &nbsp;|&nbsp; Undergrad: 718-990-6212 &nbsp;|&nbsp; Grad: 718-990-6417</p>
+          <p>🕐 Mon–Thurs: 8:30 AM – 4:30 PM &nbsp;|&nbsp; Fri: 8:30 AM – 3:00 PM</p>
+        </div>
+      </div>
+
+      <!-- Pharmacy -->
+      <div style="margin-bottom:28px;">
+        <div style="background:#1A6B45;color:white;border-radius:10px;padding:12px 16px;margin-bottom:14px;">
+          <h3 style="font-size:15px;font-weight:600;margin:0;">💊 College of Pharmacy & Health Sciences (CPHS)</h3>
+          <p style="font-size:12px;opacity:0.85;margin:2px 0 0;">📍 St. Albert Hall, Room 171</p>
+        </div>
+        <div style="font-size:13px;color:#444;padding:0 4px;display:grid;gap:6px;">
+          <p>👤 Dean: Anne Y. F. Lin, Pharm.D.</p>
+          <p>📞 General/Undergrad: 718-990-6275 &nbsp;|&nbsp; PharmD: 718-990-1439 &nbsp;|&nbsp; Grad (PhD/Master's): 718-990-6187</p>
+          <p>✉️ CPHS@stjohns.edu</p>
+          <p>🕐 Mon–Thurs: 8:30 AM – 4:30 PM &nbsp;|&nbsp; Fri: 8:30 AM – 3:00 PM</p>
+        </div>
+      </div>
+
+      <!-- CCPS -->
+      <div style="margin-bottom:28px;">
+        <div style="background:#6B3A8A;color:white;border-radius:10px;padding:12px 16px;margin-bottom:14px;">
+          <h3 style="font-size:15px;font-weight:600;margin:0;">🎓 Collins College of Professional Studies (CCPS)</h3>
+          <p style="font-size:12px;opacity:0.85;margin:2px 0 0;">📍 St. Augustine Hall, 2nd Floor</p>
+        </div>
+        <div style="font-size:13px;color:#444;padding:0 4px;display:grid;gap:10px;">
+          <div>
+            <p>👤 Dean: Luca Iandoli, Ph.D.</p>
+            <p>📞 718-990-6414</p>
+            <p>🕐 Mon–Thurs: 8:30 AM – 4:30 PM &nbsp;|&nbsp; Fri: 8:30 AM – 3:00 PM</p>
+          </div>
+          <div style="background:#f9f9f9;border-radius:8px;padding:12px;">
+            <p style="font-weight:600;margin-bottom:6px;">Leadership</p>
+            <p>Craig Baron — Associate Dean (Academic Faculty)</p>
+            <p>Radhika Jha — Associate Dean (Graduate & Engagement)</p>
+          </div>
+          <div style="background:#f9f9f9;border-radius:8px;padding:12px;">
+            <p style="font-weight:600;margin-bottom:8px;">Advising Deans (by last name)</p>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:4px 16px;">
+              <p>A–B: Andrew Bhola</p>
+              <p>C–D: Gail Chiarovano</p>
+              <p>E–G: Fr. Michael Cummins</p>
+              <p>H–L: Theresa Peros</p>
+              <p>M–P: Geraldine Castelli</p>
+              <p>Q–S: Diana Morgan</p>
+              <p>T–Z / ROTC / Veterans: Randy Ortiz</p>
+              <p>Graduate (A–Z): Justin Goldberg</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <style>
+    #deans-modal { display: none; }
+    #deans-modal.open { display: block; }
+  </style>
+
+  <!-- GRANTS MODAL -->
+  <div id="grants-modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.55);z-index:9999;overflow-y:auto;padding:24px 16px;" onclick="if(event.target===this)this.classList.remove('open')">
+    <div style="background:white;border-radius:20px;max-width:620px;margin:0 auto;padding:36px 32px;position:relative;">
+      <button onclick="document.getElementById('grants-modal').classList.remove('open')" style="position:absolute;top:16px;right:16px;background:none;border:none;font-size:22px;cursor:pointer;color:#666;">✕</button>
+
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:20px;">
+        <div style="background:#F5E6C8;border-radius:12px;width:48px;height:48px;display:flex;align-items:center;justify-content:center;font-size:24px;flex-shrink:0;">💰</div>
+        <div>
+          <h2 style="font-family:'DM Serif Display',serif;font-size:24px;font-weight:400;margin:0;">Tuition Support Grants</h2>
+          <p style="color:#888;font-size:13px;margin:2px 0 0;">SSS Supplemental Grant Funding</p>
+        </div>
+      </div>
+
+      <!-- Eligibility info -->
+      <div style="background:#fff8f0;border-left:4px solid #C8972A;border-radius:0 10px 10px 0;padding:16px 18px;margin-bottom:16px;">
+        <p style="font-size:13px;font-weight:600;color:#C8972A;margin-bottom:6px;">📅 When to Request</p>
+        <p style="font-size:13px;color:#444;line-height:1.6;">Grants may be requested after your first semester as an active SSS student. Requests must be submitted <strong>during the semester prior</strong> to the one for which funding is sought (e.g., request a spring grant during the fall semester).</p>
+      </div>
+
+      <div style="background:#fff0f3;border-left:4px solid #CC0033;border-radius:0 10px 10px 0;padding:16px 18px;margin-bottom:16px;">
+        <p style="font-size:13px;font-weight:600;color:#CC0033;margin-bottom:6px;">✅ Eligibility Requirements</p>
+        <p style="font-size:13px;color:#444;line-height:1.6;">To be eligible, students must be <strong>active SSS participants</strong>. This includes:</p>
+        <ul style="font-size:13px;color:#444;line-height:1.8;margin:8px 0 0 16px;">
+          <li>Attending at least <strong>3 events or workshops</strong> each semester</li>
+          <li>Communicating with SSS staff if unable to attend</li>
+          <li>Responding to required emails</li>
+          <li>Reviewing program resources</li>
+          <li>Participating in check-ins and advising sessions</li>
+        </ul>
+      </div>
+
+      <div style="background:#f0f4ff;border-left:4px solid #1A3A8F;border-radius:0 10px 10px 0;padding:16px 18px;margin-bottom:20px;">
+        <p style="font-size:13px;font-weight:600;color:#1A3A8F;margin-bottom:6px;">ℹ️ Important Notes</p>
+        <p style="font-size:13px;color:#444;line-height:1.6;">Grants are <strong>not guaranteed</strong> and are awarded based on available funding, student engagement, and demonstrated need. Students must be <strong>Pell Grant recipients</strong> and have an outstanding balance on their account at the time Financial Services applies the grant.</p>
+      </div>
+
+      <!-- Contact -->
+      <div style="background:#f9f9f9;border-radius:12px;padding:16px 18px;margin-bottom:24px;">
+        <p style="font-size:12px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:#888;margin-bottom:8px;">Contact</p>
+        <p style="font-size:14px;font-weight:600;color:#222;margin-bottom:4px;">Halima Camara</p>
+        <p style="font-size:13px;color:#555;">SSS Assistant Director</p>
+        <p style="font-size:13px;color:#555;">📍 St. John's Hall, Rm. 103</p>
+        <p style="font-size:13px;color:#555;">📞 718-990-3230</p>
+      </div>
+
+      <!-- Request button -->
+      <button onclick="requestGrant()" style="width:100%;padding:14px;background:#CC0033;color:white;border:none;border-radius:12px;font-size:15px;font-weight:600;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;">
+        ✉️ Request a Grant
+      </button>
+      <p style="font-size:11px;color:#aaa;text-align:center;margin-top:8px;">This will open a pre-filled email in your mail app.</p>
+    </div>
+  </div>
+
+  <style>
+    #grants-modal { display: none; }
+    #grants-modal.open { display: block; }
+  </style>
+
+  <script>
+  function requestGrant() {
+    const subject = encodeURIComponent('SSS Tuition Support Grant Request');
+    const body = encodeURIComponent(
+`Dear Halima,
+
+I would like to request a Tuition Support Grant for the upcoming semester. Please find my information below:
+
+Full Name: 
+XID: 
+Semester Requesting Grant For (e.g., Spring 2026): 
+Major: 
+Expected Graduation Year: 
+SSS Meetings/Events Attended This Semester:
+  1. 
+  2. 
+  3. 
+
+Please let me know if you need any additional information.
+
+Thank you,
+[Your Name]`
+    );
+    window.location.href = `mailto:camarah@stjohns.edu?subject=${subject}&body=${body}`;
+  }
+  </script>
 
   <!-- DISCLAIMER -->
   <div style="background:var(--warm-gray);border:1px solid var(--border);border-radius:14px;padding:20px 24px;margin-top:48px;margin-bottom:0;">
@@ -2227,6 +2627,57 @@
     observeNewCards();
   }
 
+  // ── RENDER ADMIN OPPORTUNITIES ──
+  async function loadAdminOpportunities() {
+    const items = await fetchSheet('opportunities');
+    const grid = document.getElementById('opportunities-grid');
+    const empty = document.getElementById('opportunities-empty');
+    if (!items.length) return;
+    grid.innerHTML = '';
+    const colors = ['#CC0033','#C8972A','#1A6B45','#1A3A8F','#6B3A8A','#C8420A','#0A7A6B','#5A3A8A'];
+    items.forEach((o, i) => {
+      const color = colors[i % colors.length];
+      const initials = (o.name||'?').charAt(0).toUpperCase();
+      const card = document.createElement('div');
+      card.className = 'program-tile';
+      card.innerHTML = `
+        <div class="tile-icon" style="background:${color};color:white;font-size:20px;font-weight:700;border-radius:12px;width:44px;height:44px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">${initials}</div>
+        <div class="tile-body">
+          ${o.type ? `<span style="font-size:11px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--red);display:block;margin-bottom:4px;">${o.type}${o.badge ? ' · ' + o.badge : ''}</span>` : ''}
+          <h3 style="margin-bottom:4px;">${o.name||''}</h3>
+          <p style="font-size:13px;color:var(--text-light);line-height:1.5;">${o.desc||''}</p>
+          ${o.url ? `<a href="${o.url}" target="_blank" rel="noopener" style="display:inline-block;margin-top:8px;font-size:12px;font-weight:600;color:var(--red);text-decoration:none;">Learn More →</a>` : ''}
+        </div>`;
+      grid.appendChild(card);
+    });
+    observeNewCards();
+  }
+
+  // ── RENDER TEAM ──
+  async function loadDynamicTeam() {
+    const team = await fetchSheet('team');
+    const grid = document.getElementById('team-grid');
+    const empty = document.getElementById('team-empty');
+    if (!team.length) {
+      if (empty) empty.textContent = 'Team members coming soon.';
+      return;
+    }
+    grid.innerHTML = '';
+    team.forEach(m => {
+      const card = document.createElement('div');
+      card.className = 'program-tile';
+      card.innerHTML = `
+        <div class="tile-icon tile-red" style="font-size:28px;">${m.emoji || '👤'}</div>
+        <div class="tile-body">
+          <h3 style="margin-bottom:4px;">${m.name || ''}</h3>
+          <p style="font-size:12px;font-weight:600;color:var(--red);margin-bottom:6px;">${m.role || ''}</p>
+          ${m.email ? `<p style="font-size:12px;color:var(--text-light);">✉️ <a href="mailto:${m.email}" style="color:var(--red);text-decoration:none;">${m.email}</a></p>` : ''}
+          ${m.bio ? `<p style="font-size:12px;color:var(--text-light);margin-top:6px;line-height:1.5;">${m.bio}</p>` : ''}
+        </div>`;
+      grid.appendChild(card);
+    });
+  }
+
   // ── RENDER EVENTS ──
   async function loadDynamicEvents() {
     const upcoming = await fetchSheet('upcoming');
@@ -2333,6 +2784,8 @@
   loadDynamicSpotlights();
   loadDynamicOpportunities();
   loadDynamicEvents();
+  loadDynamicTeam();
+  loadAdminOpportunities();
 
   // ── PASSWORD GATE ──
   (function() {
