@@ -1202,6 +1202,28 @@
     <a href="#past-events">Past Events</a>
     <a href="#resources">Campus Resources</a>
   </div>
+  <!-- SEARCH BAR -->
+  <div style="background:#1a1a1a;padding:8px 16px;border-top:1px solid rgba(255,255,255,0.07);">
+    <div style="max-width:1080px;margin:auto;position:relative;" id="search-container">
+      <div style="position:relative;">
+        <span style="position:absolute;left:12px;top:50%;transform:translateY(-50%);font-size:14px;opacity:0.5;">🔍</span>
+        <input
+          id="site-search"
+          type="text"
+          placeholder="Search resources, guides, events..."
+          autocomplete="off"
+          style="width:100%;padding:9px 12px 9px 36px;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.12);border-radius:10px;color:white;font-size:13px;outline:none;box-sizing:border-box;transition:border .2s;"
+          onfocus="showSearchDropdown()"
+          oninput="handleSearchInput(this.value)"
+          onblur="setTimeout(()=>hideSearchDropdown(),200)"
+        />
+      </div>
+      <!-- DROPDOWN -->
+      <div id="search-dropdown" style="display:none;position:absolute;top:calc(100% + 6px);left:0;right:0;background:white;border-radius:12px;box-shadow:0 8px 32px rgba(0,0,0,0.2);z-index:999;overflow:hidden;max-height:380px;overflow-y:auto;">
+        <div id="search-suggestions"></div>
+      </div>
+    </div>
+  </div>
 </nav>
 
 <main id="main-content">
@@ -2717,7 +2739,145 @@ Thank you,
     observeNewCards();
   }
 
-  // ── CONTENT VIEWER MODAL ──
+  // ══════════════════════════════════════════════
+  // SEARCH
+  // ══════════════════════════════════════════════
+
+  const SEARCH_INDEX = [
+    // Navigation / Sections
+    { label: 'About SSS / TRIO Program', desc: 'What is Student Support Services?', icon: '🎓', action: () => scrollTo('#about') },
+    { label: 'Upcoming Events', desc: 'Workshops and programs happening soon', icon: '📅', action: () => scrollTo('#upcoming-events') },
+    { label: 'Past Events', desc: 'Archive of previous SSS events', icon: '🗂', action: () => scrollTo('#past-events') },
+    { label: 'Campus Resources', desc: 'Academic, wellness, jobs, and more at SJU', icon: '🏫', action: () => scrollTo('#resources') },
+    { label: 'Career Services Tools', desc: 'Handshake, Forage, Big Interview, and more', icon: '💼', action: () => scrollTo('#career-services') },
+    { label: 'Opportunities', desc: 'Fellowships, internships, and programs', icon: '🚀', action: () => scrollTo('#opportunities-admin') },
+    { label: 'Off-Campus Resources', desc: 'External fellowships and programs', icon: '🌍', action: () => scrollTo('#opportunities') },
+    { label: 'Scholarship Support', desc: 'Financial aid, appeals, and scholarships', icon: '💰', action: () => scrollTo('#scholarships') },
+    { label: 'How-To Guides', desc: 'Step-by-step guides for college life', icon: '📖', action: () => scrollTo('#guides') },
+    { label: 'Student Spotlights', desc: 'Inspiring stories from SSS students', icon: '⭐', action: () => scrollTo('#spotlights') },
+    { label: 'Newsletters', desc: 'Monthly SSS newsletters', icon: '📰', action: () => scrollTo('#newsletters') },
+    { label: 'Meet the Team', desc: 'SSS staff and contacts', icon: '👥', action: () => scrollTo('#meet-the-team') },
+
+    // Campus Resources
+    { label: 'Free Counseling (CCC)', desc: 'Center for Counseling & Consultation — free mental health services', icon: '🧠', action: () => { scrollTo('#resources'); } },
+    { label: '24/7 Mental Health Helpline', desc: '718-990-6352 — available anytime', icon: '🆘', action: () => { scrollTo('#resources'); } },
+    { label: 'Student Health Services', desc: 'Free medical care — DaSilva Hall', icon: '🏥', action: () => scrollTo('#resources') },
+    { label: 'Office of Disability Services (ODS)', desc: 'Accommodations — Marillac Hall Rm 134', icon: '♿', action: () => scrollTo('#resources') },
+    { label: 'SOAR — Sexual Violence Support', desc: 'Confidential support, 718-990-8484', icon: '💜', action: () => scrollTo('#resources') },
+    { label: 'Campus Recreation (CREC)', desc: 'Fitness center, intramurals, sports', icon: '🏋️', action: () => scrollTo('#resources') },
+    { label: 'Inclusivity Resource Center (IRC)', desc: 'Safe, inclusive space for all students', icon: '🌈', action: () => scrollTo('#resources') },
+    { label: 'Financial Aid Office', desc: 'Tobin College Building — Queens Campus', icon: '🎓', action: () => scrollTo('#resources') },
+    { label: 'Study Rooms', desc: 'St. John\'s Hall, Room 103B', icon: '📖', action: () => scrollTo('#resources') },
+    { label: 'Printing & Computer Lab', desc: 'St. John\'s Hall, Room 107A', icon: '🖨️', action: () => scrollTo('#resources') },
+    { label: 'Tutoring', desc: 'University Learning Commons', icon: '✏️', action: () => scrollTo('#resources') },
+    { label: 'Writing Center', desc: 'Free writing support for all students', icon: '✍️', action: () => scrollTo('#resources') },
+    { label: 'Food Pantry', desc: 'Free food resources for students in need', icon: '🍎', action: () => scrollTo('#resources') },
+    { label: 'Shuttle Van', desc: 'Free Public Safety shuttle on campus', icon: '🚌', action: () => scrollTo('#resources') },
+    { label: 'GrubHub+ at SJU', desc: 'Learn how to use your GrubHub benefit', icon: '🍔', action: () => scrollTo('#resources') },
+    { label: 'Deans & Academic Offices', desc: 'Contact info for all SJU colleges', icon: '🎓', action: () => document.getElementById('deans-modal').classList.add('open') },
+
+    // Career Tools
+    { label: 'Handshake', desc: 'SJU recruiting platform — jobs & internships', icon: '🤝', action: () => window.open('https://stjohns.joinhandshake.com/login','_blank') },
+    { label: 'Parker Dewey', desc: 'Paid micro-internships', icon: '💼', action: () => window.open('https://info.parkerdewey.com/student/stjohns','_blank') },
+    { label: 'Forage', desc: 'Virtual work experience programs', icon: '🌱', action: () => window.open('https://www.theforage.com/landing/st-johns-university-7t43j/st-johns-university-k40f','_blank') },
+    { label: 'Big Interview', desc: 'Practice interviews with video feedback', icon: '🎤', action: () => window.open('https://careerservices.stjohns.edu/resources/big-interview/','_blank') },
+    { label: 'LinkedIn Career Services', desc: 'Connect and build your network', icon: '🔗', action: () => window.open('https://www.linkedin.com/company/stjohnscareerservices/','_blank') },
+    { label: 'Focus2 Career Assessment', desc: 'Discover careers that match your strengths', icon: '🧭', action: () => window.open('https://careerservices.stjohns.edu/account/login/?redirect_to=%2Fresources%2Ffocus2%2F&restricted=true','_blank') },
+    { label: 'Interstride', desc: 'Job search for international students', icon: '🌍', action: () => window.open('https://student.interstride.com/login','_blank') },
+    { label: 'Career Communities at SJU', desc: 'Explore career paths by interest', icon: '🗺️', action: () => window.open('https://careerservices.stjohns.edu/channels/what-are-communities/','_blank') },
+
+    // Grants
+    { label: 'Tuition Support Grant', desc: 'Request a supplemental SSS grant', icon: '💰', action: () => document.getElementById('grants-modal').classList.add('open') },
+    { label: 'Financial Aid Appeal', desc: 'Appeal your financial aid every semester', icon: '📩', action: () => scrollTo('#scholarships') },
+
+    // Quick actions
+    { label: 'SSS Instagram', desc: '@sssprogram_sju', icon: '📸', action: () => window.open('https://www.instagram.com/sssprogram_sju','_blank') },
+    { label: 'St. John\'s Sign On', desc: 'Access email, Canvas, and all SJU platforms', icon: '🔐', action: () => window.open('https://signon.stjohns.edu/','_blank') },
+    { label: 'Financial Aid Website', desc: 'stjohns.edu — tuition and financial aid', icon: '💳', action: () => window.open('https://www.stjohns.edu/admission/tuition-and-financial-aid','_blank') },
+  ];
+
+  const SUGGESTED = [
+    'Upcoming Events', 'Tuition Support Grant', 'Handshake', 'Free Counseling (CCC)',
+    'Study Rooms', 'How-To Guides', 'Scholarship Support', 'Printing & Computer Lab',
+    'Career Communities at SJU', 'Deans & Academic Offices'
+  ];
+
+  function scrollTo(id) {
+    const el = document.querySelector(id);
+    if (el) { el.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+    hideSearchDropdown();
+    document.getElementById('site-search').value = '';
+  }
+
+  function showSearchDropdown() {
+    const dropdown = document.getElementById('search-dropdown');
+    const suggestionsEl = document.getElementById('search-suggestions');
+    const query = document.getElementById('site-search').value.trim();
+    if (!query) {
+      // Show recommended searches
+      suggestionsEl.innerHTML = `
+        <div style="padding:10px 16px 6px;font-size:11px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:#aaa;">Recommended Searches</div>
+        ${SUGGESTED.map(label => {
+          const item = SEARCH_INDEX.find(i => i.label === label);
+          if (!item) return '';
+          return `<div class="search-item" onclick="runSearch('${label.replace(/'/g,"\\'")}')">
+            <span style="font-size:18px;width:28px;text-align:center;">${item.icon}</span>
+            <div><div style="font-size:13px;font-weight:500;color:#222;">${item.label}</div><div style="font-size:11px;color:#888;">${item.desc}</div></div>
+          </div>`;
+        }).join('')}`;
+    }
+    dropdown.style.display = 'block';
+  }
+
+  function hideSearchDropdown() {
+    document.getElementById('search-dropdown').style.display = 'none';
+  }
+
+  function handleSearchInput(query) {
+    const suggestionsEl = document.getElementById('search-suggestions');
+    const dropdown = document.getElementById('search-dropdown');
+    dropdown.style.display = 'block';
+    if (!query.trim()) { showSearchDropdown(); return; }
+
+    const q = query.toLowerCase();
+    const results = SEARCH_INDEX.filter(item =>
+      item.label.toLowerCase().includes(q) ||
+      item.desc.toLowerCase().includes(q)
+    ).slice(0, 8);
+
+    if (!results.length) {
+      suggestionsEl.innerHTML = `<div style="padding:20px;text-align:center;color:#aaa;font-size:13px;">No results for "<strong style="color:#222;">${query}</strong>"</div>`;
+      return;
+    }
+
+    suggestionsEl.innerHTML = `
+      <div style="padding:10px 16px 6px;font-size:11px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:#aaa;">Results</div>
+      ${results.map(item => `
+        <div class="search-item" onclick="(${item.action.toString()})(); hideSearchDropdown(); document.getElementById('site-search').value='';">
+          <span style="font-size:18px;width:28px;text-align:center;">${item.icon}</span>
+          <div><div style="font-size:13px;font-weight:500;color:#222;">${item.label}</div><div style="font-size:11px;color:#888;">${item.desc}</div></div>
+        </div>`).join('')}`;
+  }
+
+  function runSearch(label) {
+    const item = SEARCH_INDEX.find(i => i.label === label);
+    if (item) { item.action(); hideSearchDropdown(); document.getElementById('site-search').value = ''; }
+  }
+
+  // Search item hover styles
+  const searchStyle = document.createElement('style');
+  searchStyle.textContent = `.search-item { display:flex; align-items:center; gap:12px; padding:10px 16px; cursor:pointer; transition:background .15s; } .search-item:hover { background:#fff5f5; }`;
+  document.head.appendChild(searchStyle);
+
+  // Enter key support
+  document.getElementById('site-search').addEventListener('keydown', e => {
+    if (e.key === 'Escape') { hideSearchDropdown(); document.getElementById('site-search').blur(); }
+    if (e.key === 'Enter') {
+      const q = e.target.value.trim().toLowerCase();
+      const match = SEARCH_INDEX.find(i => i.label.toLowerCase().includes(q) || i.desc.toLowerCase().includes(q));
+      if (match) { match.action(); hideSearchDropdown(); e.target.value = ''; }
+    }
+  });
   let _guideCache = [], _nlCache = [];
 
   async function openGuide(id) {
